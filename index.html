@@ -3,261 +3,348 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Content Publishing Tracker</title>
+<title>Content Publishing Tracker | McLeod Real Estate Consulting</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #ffffff;
-    --bg-secondary: #f5f5f4;
-    --bg-tertiary: #eeece8;
-    --text: #1a1a18;
-    --text-secondary: #5f5e5a;
-    --text-tertiary: #888780;
-    --border: rgba(0,0,0,0.12);
-    --border-secondary: rgba(0,0,0,0.22);
-    --radius-md: 8px;
-    --radius-lg: 12px;
-    --success: #3b6d11;
-    --info-bg: #e6f1fb;
-    --info-text: #0c447c;
-    --danger-text: #a32d2d;
-    --danger-bg: #fcebeb;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1c1c1a;
-      --bg-secondary: #252522;
-      --bg-tertiary: #2e2e2a;
-      --text: #f0ede8;
-      --text-secondary: #b4b2a9;
-      --text-tertiary: #888780;
-      --border: rgba(255,255,255,0.1);
-      --border-secondary: rgba(255,255,255,0.2);
-      --success: #97c459;
-      --info-bg: #042c53;
-      --info-text: #85b7eb;
-      --danger-text: #f09595;
-      --danger-bg: #501313;
-    }
+    --navy:       #1B2D6B;
+    --navy-light: #2a3f8f;
+    --blue:       #3B6FA0;
+    --teal:       #5BB8D4;
+    --teal-light: #9DD8EA;
+    --teal-pale:  #D6F0F7;
+    --gray-bg:    #E8EDF2;
+    --gray-mid:   #C8D3DC;
+    --white:      #ffffff;
+    --text:       #1B2D6B;
+    --text-mid:   #3B6FA0;
+    --text-muted: #6B8BAA;
+    --border:     rgba(27,45,107,0.15);
+    --border-md:  rgba(27,45,107,0.25);
+    --radius-md:  8px;
+    --radius-lg:  12px;
+    --success:    #2e7d32;
   }
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--bg-tertiary);
+    background: var(--gray-bg);
     color: var(--text);
     min-height: 100vh;
-    padding: 2rem 1rem;
+    padding: 0;
   }
 
-  .container { max-width: 900px; margin: 0 auto; }
-
-  .page-header {
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 12px; margin-bottom: 1.5rem;
+  /* HEADER BANNER */
+  .site-header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, var(--teal) 100%);
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
-  .page-title {
-    font-size: 22px; font-weight: 500; color: var(--text);
-    display: flex; align-items: center; gap: 8px;
+  .site-header h1 {
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 0.01em;
+  }
+
+  .site-header h1 i { font-size: 22px; color: var(--teal-light); }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
   }
 
   .month-badge {
-    font-size: 13px; color: var(--text-secondary);
-    background: var(--bg); padding: 4px 14px;
-    border-radius: var(--radius-md);
-    border: 0.5px solid var(--border);
+    background: rgba(255,255,255,0.15);
+    color: var(--white);
+    font-size: 13px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(4px);
   }
-
-  .card {
-    background: var(--bg);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 1.25rem;
-    margin-bottom: 1rem;
-  }
-
-  .controls {
-    display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 1.25rem;
-  }
-
-  .controls input {
-    font-size: 14px; padding: 8px 12px;
-    border-radius: var(--radius-md);
-    border: 0.5px solid var(--border-secondary);
-    background: var(--bg); color: var(--text);
-    flex: 1; min-width: 180px; max-width: 280px;
-    outline: none;
-  }
-
-  .controls input:focus { border-color: var(--info-text); }
-
-  .btn {
-    font-size: 13px; padding: 8px 16px;
-    border-radius: var(--radius-md);
-    border: 0.5px solid var(--border-secondary);
-    background: transparent; color: var(--text);
-    cursor: pointer; white-space: nowrap;
-    display: inline-flex; align-items: center; gap: 4px;
-    transition: background 0.12s;
-  }
-  .btn:hover { background: var(--bg-secondary); }
-  .btn:active { transform: scale(0.98); }
 
   .btn-reset {
-    font-size: 12px; color: var(--text-tertiary);
-    background: none; border: none; cursor: pointer;
-    text-decoration: underline; padding: 0;
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    background: none;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 5px 12px;
+    transition: all 0.15s;
   }
-  .btn-reset:hover { color: var(--text); }
+  .btn-reset:hover { background: rgba(255,255,255,0.15); color: var(--white); }
 
-  .table-wrap { overflow-x: auto; }
+  /* MAIN */
+  .main { padding: 1.5rem 1.25rem; max-width: 960px; margin: 0 auto; }
 
-  table {
-    width: 100%; border-collapse: collapse; font-size: 13px;
-    min-width: 600px;
-  }
-
-  thead th {
-    font-size: 11px; font-weight: 500; color: var(--text-secondary);
-    text-transform: uppercase; letter-spacing: 0.04em;
-    padding: 6px 10px;
-    border-bottom: 0.5px solid var(--border);
-    white-space: nowrap; text-align: center;
-  }
-  thead th.col-name { text-align: left; }
-
-  tbody tr { border-bottom: 0.5px solid var(--border); }
-  tbody tr:last-child { border-bottom: none; }
-
-  tbody td {
-    padding: 7px 10px; vertical-align: middle; text-align: center;
-  }
-  tbody td.col-name { text-align: left; }
-
-  tr.client-row td { background: var(--bg-secondary); }
-
-  .client-cell { display: flex; align-items: center; gap: 10px; }
-
-  .avatar {
-    width: 30px; height: 30px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 500; flex-shrink: 0;
-  }
-
-  .client-name { font-weight: 500; font-size: 14px; }
-
-  tr.section-row td {
-    font-size: 11px; font-weight: 500; color: var(--text-tertiary);
-    background: var(--bg-tertiary); padding: 4px 10px;
-    text-transform: uppercase; letter-spacing: 0.05em;
-  }
-
-  td.blog-label {
-    font-size: 12px; color: var(--text-secondary);
-    padding-left: 28px; text-align: left;
-  }
-
-  input[type="checkbox"] {
-    width: 16px; height: 16px; cursor: pointer;
-    accent-color: var(--success);
-  }
-
-  .del-btn {
-    background: none; border: none; cursor: pointer;
-    color: var(--text-tertiary); padding: 3px 5px;
-    border-radius: 4px; font-size: 15px; line-height: 1;
-    transition: background 0.12s, color 0.12s;
-  }
-  .del-btn:hover { color: var(--danger-text); background: var(--danger-bg); }
-
-  .progress-wrap { display: flex; flex-direction: column; align-items: center; gap: 3px; }
-  .progress-bar {
-    height: 4px; background: var(--bg-secondary);
-    border-radius: 2px; overflow: hidden; width: 64px;
-  }
-  .progress-fill { height: 100%; background: var(--success); border-radius: 2px; transition: width 0.2s; }
-  .progress-pct { font-size: 11px; color: var(--text-tertiary); }
-
+  /* SUMMARY STATS */
   .summary {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 12px; margin-top: 1.25rem;
+    gap: 10px;
+    margin-bottom: 1.25rem;
   }
 
   .stat {
-    background: var(--bg-secondary); border-radius: var(--radius-md);
-    padding: 12px 16px;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 14px 16px;
+    border-left: 4px solid var(--teal);
+    box-shadow: 0 1px 3px rgba(27,45,107,0.08);
   }
-  .stat-val { font-size: 24px; font-weight: 500; color: var(--text); }
-  .stat-lbl { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+  .stat:nth-child(2) { border-left-color: var(--navy); }
+  .stat:nth-child(3) { border-left-color: var(--blue); }
+  .stat:nth-child(4) { border-left-color: var(--teal-light); }
 
-  .empty-state {
-    padding: 2.5rem; text-align: center;
-    color: var(--text-secondary); font-size: 14px;
+  .stat-val { font-size: 26px; font-weight: 600; color: var(--navy); }
+  .stat-lbl { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ADD CLIENT */
+  .add-bar {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(27,45,107,0.08);
+    border: 0.5px solid var(--border);
   }
 
-  .monthly-check {
+  .add-bar input {
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: var(--radius-md);
+    border: 1.5px solid var(--gray-mid);
+    color: var(--text);
+    flex: 1;
+    min-width: 180px;
+    max-width: 300px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .add-bar input:focus { border-color: var(--teal); }
+
+  .btn-add {
+    font-size: 13px;
+    padding: 8px 18px;
+    border-radius: var(--radius-md);
+    border: none;
+    background: var(--navy);
+    color: var(--white);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+    transition: background 0.15s;
+  }
+  .btn-add:hover { background: var(--navy-light); }
+  .btn-add:active { transform: scale(0.98); }
+
+  /* CLIENT CARDS */
+  .clients-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .client-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 0.5px solid var(--border);
+    box-shadow: 0 1px 3px rgba(27,45,107,0.07);
+    overflow: hidden;
+    transition: box-shadow 0.15s;
+  }
+  .client-card.dragging {
+    opacity: 0.5;
+    box-shadow: 0 8px 24px rgba(27,45,107,0.2);
+  }
+  .client-card.drag-over {
+    border: 2px dashed var(--teal);
+  }
+
+  /* CLIENT CARD HEADER */
+  .card-header {
+    background: linear-gradient(90deg, var(--navy) 0%, var(--blue) 100%);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .drag-handle {
+    color: rgba(255,255,255,0.5);
+    cursor: grab;
+    font-size: 16px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: color 0.12s;
+    flex-shrink: 0;
+  }
+  .drag-handle:hover { color: var(--white); }
+  .drag-handle:active { cursor: grabbing; }
+
+  .avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    border: 2px solid rgba(255,255,255,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 600; color: var(--white);
+    flex-shrink: 0;
+  }
+
+  .card-name { font-weight: 600; font-size: 15px; color: var(--white); flex: 1; }
+
+  .card-progress {
     display: flex; align-items: center; gap: 8px;
   }
-  .monthly-status {
-    font-size: 12px; color: var(--text-secondary);
+  .prog-bar {
+    width: 80px; height: 5px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 3px; overflow: hidden;
+  }
+  .prog-fill { height: 100%; background: var(--teal-light); border-radius: 3px; transition: width 0.2s; }
+  .prog-pct { font-size: 12px; color: rgba(255,255,255,0.8); min-width: 30px; }
+
+  .move-btns { display: flex; gap: 2px; }
+  .move-btn {
+    background: rgba(255,255,255,0.12);
+    border: none; border-radius: 4px;
+    color: rgba(255,255,255,0.7);
+    cursor: pointer; padding: 3px 6px; font-size: 13px;
+    transition: background 0.12s, color 0.12s;
+  }
+  .move-btn:hover { background: rgba(255,255,255,0.25); color: var(--white); }
+
+  .del-btn {
+    background: rgba(255,255,255,0.1);
+    border: none; border-radius: 4px;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer; padding: 3px 7px; font-size: 14px;
+    transition: background 0.12s, color 0.12s;
+    flex-shrink: 0;
+  }
+  .del-btn:hover { background: rgba(220,50,50,0.35); color: var(--white); }
+
+  /* TABLE */
+  .card-body { padding: 0; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+
+  .section-label td {
+    background: var(--teal-pale);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 5px 14px;
+    border-top: 0.5px solid var(--border);
+  }
+
+  tbody tr.data-row { border-bottom: 0.5px solid var(--border); }
+  tbody tr.data-row:last-child { border-bottom: none; }
+  tbody tr.data-row:hover { background: #f5f9fc; }
+
+  td { padding: 7px 10px; vertical-align: middle; text-align: center; }
+  td.col-label { text-align: left; padding-left: 20px; font-size: 12px; color: var(--text-mid); width: 140px; }
+
+  thead.col-heads th {
+    font-size: 11px; font-weight: 600; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.04em;
+    padding: 6px 10px;
+    background: #f0f5f9;
+    border-bottom: 1px solid var(--border-md);
+    text-align: center;
+    white-space: nowrap;
+  }
+  thead.col-heads th.col-label { text-align: left; padding-left: 20px; }
+
+  input[type="checkbox"] {
+    width: 17px; height: 17px;
+    cursor: pointer;
+    accent-color: var(--navy);
+  }
+
+  .monthly-row td { background: #fafcff; }
+  .monthly-check { display: flex; align-items: center; gap: 8px; }
+  .monthly-status { font-size: 12px; color: var(--text-muted); }
+  .done-status { color: var(--success); font-weight: 500; }
+
+  .empty-state {
+    text-align: center; padding: 3rem 1rem;
+    color: var(--text-muted); font-size: 14px;
+  }
+  .empty-state i { font-size: 40px; display: block; margin-bottom: 10px; color: var(--gray-mid); }
+
+  /* FOOTER */
+  .site-footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 1rem;
   }
 
   @media (max-width: 600px) {
-    body { padding: 1rem 0.5rem; }
-    .page-title { font-size: 18px; }
+    .site-header { padding: 1rem; }
+    .main { padding: 1rem 0.75rem; }
+    table { min-width: 500px; }
+    .card-body { overflow-x: auto; }
   }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="page-header">
-    <h1 class="page-title">
-      <i class="ti ti-calendar-check" aria-hidden="true"></i>
-      Content Publishing Tracker
-    </h1>
+
+<header class="site-header">
+  <h1>
+    <i class="ti ti-calendar-check" aria-hidden="true"></i>
+    Content Publishing Tracker
+  </h1>
+  <div class="header-right">
     <span class="month-badge" id="month-label"></span>
+    <button class="btn-reset" onclick="resetMonth()">
+      <i class="ti ti-refresh" aria-hidden="true" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>Reset month
+    </button>
+  </div>
+</header>
+
+<main class="main">
+  <h2 class="sr-only">Monthly content publishing checklist by client</h2>
+
+  <div class="summary" id="summary"></div>
+
+  <div class="add-bar">
+    <input type="text" id="new-client" placeholder="Add a client..." aria-label="New client name" />
+    <button class="btn-add" onclick="addClient()">
+      <i class="ti ti-plus" aria-hidden="true"></i> Add client
+    </button>
   </div>
 
-  <div class="card">
-    <div class="controls">
-      <input type="text" id="new-client" placeholder="Client name..." aria-label="New client name" />
-      <button class="btn" onclick="addClient()">
-        <i class="ti ti-plus" aria-hidden="true"></i> Add client
-      </button>
-      <button class="btn-reset" onclick="resetMonth()">Reset month</button>
-    </div>
+  <div class="clients-list" id="clients-list"></div>
 
-    <div class="table-wrap">
-      <table id="tracker-table" aria-label="Content publishing tracker">
-        <thead>
-          <tr>
-            <th class="col-name" style="width:170px">Client</th>
-            <th style="width:28px"></th>
-            <th>Website</th>
-            <th>GMB</th>
-            <th>Facebook</th>
-            <th>Instagram</th>
-            <th>Progress</th>
-            <th style="width:32px"></th>
-          </tr>
-        </thead>
-        <tbody id="tracker-body"></tbody>
-      </table>
-    </div>
-
-    <div class="summary" id="summary"></div>
-  </div>
-</div>
+  <div class="site-footer">McLeod Real Estate Consulting &nbsp;·&nbsp; Content resets each month automatically</div>
+</main>
 
 <script>
 const BLOG_COUNT = 5;
 const COLS = ['site','gmb','fb','ig'];
-const COL_LABELS = ['Website','Google My Business','Facebook','Instagram'];
-const COLORS = ['#185FA5','#0F6E56','#993C1D','#993556','#3B6D11','#534AB7','#854F0B'];
+const COL_HEADS = ['Website','Google My Business','Facebook','Instagram'];
 
 function getMonthKey() {
   const d = new Date();
@@ -265,15 +352,13 @@ function getMonthKey() {
 }
 
 function load() {
-  try { return JSON.parse(localStorage.getItem('cpt_v3') || 'null'); } catch { return null; }
+  try { return JSON.parse(localStorage.getItem('cpt_v4') || 'null'); } catch { return null; }
 }
-
 function save() {
-  try { localStorage.setItem('cpt_v3', JSON.stringify(state)); } catch {}
+  try { localStorage.setItem('cpt_v4', JSON.stringify(state)); } catch {}
 }
 
 let state = load() || { clients: [], checks: {}, month: getMonthKey() };
-
 if (state.month !== getMonthKey()) {
   state.checks = {};
   state.month = getMonthKey();
@@ -281,112 +366,21 @@ if (state.month !== getMonthKey()) {
 }
 
 function initials(name) {
-  return name.trim().split(' ').map(w => w[0] || '').join('').slice(0,2).toUpperCase();
-}
-
-function colorFor(name) {
-  let h = 0;
-  for (const c of name) h = (h * 31 + c.charCodeAt(0)) & 0xffff;
-  return COLORS[h % COLORS.length];
+  return name.trim().split(/\s+/).map(w => w[0]||'').join('').slice(0,2).toUpperCase();
 }
 
 function ck(cid, type, blog) {
   return blog != null ? `${cid}_b${blog}_${type}` : `${cid}_${type}`;
 }
-
-function checked(key) { return !!state.checks[key]; }
+function isChecked(key) { return !!state.checks[key]; }
 
 function clientProgress(cid) {
   let done = 0, total = 0;
   for (let b = 1; b <= BLOG_COUNT; b++) {
-    COLS.forEach(t => { total++; if (checked(ck(cid, t, b))) done++; });
+    COLS.forEach(t => { total++; if (isChecked(ck(cid, t, b))) done++; });
   }
-  ['market','newsletter'].forEach(t => { total++; if (checked(ck(cid, t))) done++; });
+  ['market','newsletter'].forEach(t => { total++; if (isChecked(ck(cid, t))) done++; });
   return { done, total };
-}
-
-function render() {
-  const now = new Date();
-  document.getElementById('month-label').textContent =
-    now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-
-  const tbody = document.getElementById('tracker-body');
-  tbody.innerHTML = '';
-
-  if (!state.clients.length) {
-    tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state">Add a client above to get started</div></td></tr>`;
-  }
-
-  state.clients.forEach(client => {
-    const cid = client.id;
-    const color = colorFor(client.name);
-    const prog = clientProgress(cid);
-    const pct = prog.total ? Math.round(prog.done / prog.total * 100) : 0;
-
-    const cr = document.createElement('tr');
-    cr.className = 'client-row';
-    cr.innerHTML = `
-      <td class="col-name" colspan="5">
-        <div class="client-cell">
-          <div class="avatar" style="background:${color}22;color:${color}">${initials(client.name)}</div>
-          <span class="client-name">${escHtml(client.name)}</span>
-        </div>
-      </td>
-      <td>
-        <div class="progress-wrap">
-          <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-          <span class="progress-pct">${pct}%</span>
-        </div>
-      </td>
-      <td>
-        <button class="del-btn" onclick="removeClient('${cid}')" title="Remove ${escHtml(client.name)}" aria-label="Remove ${escHtml(client.name)}">
-          <i class="ti ti-trash" aria-hidden="true"></i>
-        </button>
-      </td>
-    `;
-    tbody.appendChild(cr);
-
-    const secBlogs = document.createElement('tr');
-    secBlogs.className = 'section-row';
-    secBlogs.innerHTML = `<td colspan="8">Blogs — ${BLOG_COUNT} per month</td>`;
-    tbody.appendChild(secBlogs);
-
-    for (let b = 1; b <= BLOG_COUNT; b++) {
-      const row = document.createElement('tr');
-      let cells = `<td class="col-name blog-label">Blog ${b}</td><td></td>`;
-      COLS.forEach((t, ti) => {
-        const key = ck(cid, t, b);
-        cells += `<td><input type="checkbox" ${checked(key)?'checked':''} aria-label="Blog ${b} ${COL_LABELS[ti]} — ${client.name}" onchange="toggle('${key}',this.checked)" /></td>`;
-      });
-      cells += `<td></td><td></td>`;
-      row.innerHTML = cells;
-      tbody.appendChild(row);
-    }
-
-    const secMonthly = document.createElement('tr');
-    secMonthly.className = 'section-row';
-    secMonthly.innerHTML = `<td colspan="8">Monthly deliverables</td>`;
-    tbody.appendChild(secMonthly);
-
-    [['market','Market report'],['newsletter','Newsletter']].forEach(([type, label]) => {
-      const key = ck(cid, type);
-      const isDone = checked(key);
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td class="col-name blog-label" colspan="2">${label}</td>
-        <td colspan="4" style="text-align:left">
-          <div class="monthly-check">
-            <input type="checkbox" ${isDone?'checked':''} aria-label="${label} — ${client.name}" onchange="toggle('${key}',this.checked)" />
-            <span class="monthly-status">${isDone ? 'Done' : 'Pending'}</span>
-          </div>
-        </td>
-        <td colspan="2"></td>
-      `;
-      tbody.appendChild(row);
-    });
-  });
-
-  renderSummary();
 }
 
 function renderSummary() {
@@ -397,16 +391,141 @@ function renderSummary() {
   });
   const pct = total ? Math.round(done / total * 100) : 0;
   document.getElementById('summary').innerHTML = `
-    <div class="stat"><div class="stat-val">${state.clients.length}</div><div class="stat-lbl">Clients</div></div>
+    <div class="stat"><div class="stat-val">${state.clients.length}</div><div class="stat-lbl">Active clients</div></div>
     <div class="stat"><div class="stat-val">${done}</div><div class="stat-lbl">Tasks complete</div></div>
     <div class="stat"><div class="stat-val">${total - done}</div><div class="stat-lbl">Tasks remaining</div></div>
     <div class="stat"><div class="stat-val">${pct}%</div><div class="stat-lbl">Month complete</div></div>
   `;
 }
 
+function renderClients() {
+  const list = document.getElementById('clients-list');
+  list.innerHTML = '';
+
+  if (!state.clients.length) {
+    list.innerHTML = `<div class="empty-state"><i class="ti ti-users" aria-hidden="true"></i>No clients yet — add one above to get started</div>`;
+    renderSummary(); return;
+  }
+
+  state.clients.forEach((client, idx) => {
+    const cid = client.id;
+    const prog = clientProgress(cid);
+    const pct = prog.total ? Math.round(prog.done / prog.total * 100) : 0;
+
+    const card = document.createElement('div');
+    card.className = 'client-card';
+    card.draggable = true;
+    card.dataset.id = cid;
+
+    // HEADER
+    const hdr = document.createElement('div');
+    hdr.className = 'card-header';
+    hdr.innerHTML = `
+      <span class="drag-handle" title="Drag to reorder" aria-hidden="true"><i class="ti ti-grip-vertical"></i></span>
+      <div class="avatar">${initials(client.name)}</div>
+      <span class="card-name">${escHtml(client.name)}</span>
+      <div class="card-progress">
+        <div class="prog-bar"><div class="prog-fill" style="width:${pct}%"></div></div>
+        <span class="prog-pct">${pct}%</span>
+      </div>
+      <div class="move-btns">
+        <button class="move-btn" onclick="moveClient('${cid}',-1)" title="Move up" aria-label="Move ${escHtml(client.name)} up"><i class="ti ti-chevron-up"></i></button>
+        <button class="move-btn" onclick="moveClient('${cid}',1)" title="Move down" aria-label="Move ${escHtml(client.name)} down"><i class="ti ti-chevron-down"></i></button>
+      </div>
+      <button class="del-btn" onclick="removeClient('${cid}')" title="Remove client" aria-label="Remove ${escHtml(client.name)}"><i class="ti ti-trash"></i></button>
+    `;
+    card.appendChild(hdr);
+
+    // BODY TABLE
+    const body = document.createElement('div');
+    body.className = 'card-body';
+
+    const table = document.createElement('table');
+    table.innerHTML = `
+      <thead class="col-heads">
+        <tr>
+          <th class="col-label">Content</th>
+          ${COL_HEADS.map(h => `<th>${h}</th>`).join('')}
+        </tr>
+      </thead>
+      <tbody id="tbody_${cid}"></tbody>
+    `;
+    body.appendChild(table);
+    card.appendChild(body);
+
+    const tbody = table.querySelector('tbody');
+
+    // Blog section label
+    const blogSec = document.createElement('tr');
+    blogSec.className = 'section-label';
+    blogSec.innerHTML = `<td colspan="${1 + COLS.length}">Blogs — ${BLOG_COUNT} per month</td>`;
+    tbody.appendChild(blogSec);
+
+    for (let b = 1; b <= BLOG_COUNT; b++) {
+      const row = document.createElement('tr');
+      row.className = 'data-row';
+      let cells = `<td class="col-label">Blog ${b}</td>`;
+      COLS.forEach((t, ti) => {
+        const key = ck(cid, t, b);
+        cells += `<td><input type="checkbox" ${isChecked(key)?'checked':''} aria-label="Blog ${b} — ${COL_HEADS[ti]}" onchange="toggle('${key}',this.checked)" /></td>`;
+      });
+      row.innerHTML = cells;
+      tbody.appendChild(row);
+    }
+
+    // Monthly section label
+    const monthlySec = document.createElement('tr');
+    monthlySec.className = 'section-label';
+    monthlySec.innerHTML = `<td colspan="${1 + COLS.length}">Monthly deliverables</td>`;
+    tbody.appendChild(monthlySec);
+
+    [['market','Market report'],['newsletter','Newsletter']].forEach(([type, label]) => {
+      const key = ck(cid, type);
+      const done = isChecked(key);
+      const row = document.createElement('tr');
+      row.className = 'data-row monthly-row';
+      row.innerHTML = `
+        <td class="col-label">${label}</td>
+        <td colspan="${COLS.length}" style="text-align:left;padding-left:14px">
+          <div class="monthly-check">
+            <input type="checkbox" ${done?'checked':''} aria-label="${label} sent via Mailchimp" onchange="toggle('${key}',this.checked)" />
+            <span class="monthly-status ${done?'done-status':''}">${done ? 'Sent' : 'Pending'}</span>
+          </div>
+        </td>
+      `;
+      tbody.appendChild(row);
+    });
+
+    list.appendChild(card);
+
+    // DRAG EVENTS
+    card.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('text/plain', cid);
+      card.classList.add('dragging');
+    });
+    card.addEventListener('dragend', () => card.classList.remove('dragging'));
+    card.addEventListener('dragover', e => { e.preventDefault(); card.classList.add('drag-over'); });
+    card.addEventListener('dragleave', () => card.classList.remove('drag-over'));
+    card.addEventListener('drop', e => {
+      e.preventDefault();
+      card.classList.remove('drag-over');
+      const fromId = e.dataTransfer.getData('text/plain');
+      const toId = cid;
+      if (fromId === toId) return;
+      const fromIdx = state.clients.findIndex(c => c.id === fromId);
+      const toIdx = state.clients.findIndex(c => c.id === toId);
+      const [moved] = state.clients.splice(fromIdx, 1);
+      state.clients.splice(toIdx, 0, moved);
+      save(); renderClients();
+    });
+  });
+
+  renderSummary();
+}
+
 function toggle(key, val) {
   state.checks[key] = val;
-  save(); render();
+  save(); renderClients();
 }
 
 function addClient() {
@@ -414,19 +533,28 @@ function addClient() {
   const name = input.value.trim();
   if (!name) return;
   state.clients.push({ id: 'c_' + Date.now(), name });
-  save(); input.value = ''; render();
+  save(); input.value = ''; renderClients();
 }
 
 function removeClient(cid) {
   if (!confirm('Remove this client?')) return;
   state.clients = state.clients.filter(c => c.id !== cid);
   Object.keys(state.checks).forEach(k => { if (k.startsWith(cid)) delete state.checks[k]; });
-  save(); render();
+  save(); renderClients();
+}
+
+function moveClient(cid, dir) {
+  const idx = state.clients.findIndex(c => c.id === cid);
+  const newIdx = idx + dir;
+  if (newIdx < 0 || newIdx >= state.clients.length) return;
+  const [moved] = state.clients.splice(idx, 1);
+  state.clients.splice(newIdx, 0, moved);
+  save(); renderClients();
 }
 
 function resetMonth() {
   if (!confirm('Reset all checkboxes for this month?')) return;
-  state.checks = {}; save(); render();
+  state.checks = {}; save(); renderClients();
 }
 
 function escHtml(str) {
@@ -437,7 +565,11 @@ document.getElementById('new-client').addEventListener('keydown', e => {
   if (e.key === 'Enter') addClient();
 });
 
-render();
+const now = new Date();
+document.getElementById('month-label').textContent =
+  now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+renderClients();
 </script>
 </body>
 </html>
