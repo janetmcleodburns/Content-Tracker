@@ -131,11 +131,11 @@
 
 <header class="site-header">
   <h1><i class="ti ti-calendar-check"></i>Content Publishing Tracker</h1>
-  <div class="header-right">
-    <div class="sync-badge"><div class="sync-dot" id="sync-dot"></div><span id="sync-label">Synced ✓</span></div>
-    <span class="month-badge" id="month-label"></span>
-    <button class="btn-reset" onclick="resetMonth()"><i class="ti ti-refresh" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>Reset month</button>
-  </div>
+    <div class="header-right">
+      <div class="sync-badge"><div class="sync-dot" id="sync-dot"></div><span id="sync-label">Synced ✓</span></div>
+      <span class="month-badge" id="month-label"></span>
+      <button class="btn-reset" onclick="resetMonth()"><i class="ti ti-refresh" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>Reset for next month</button>
+    </div>
 </header>
 
 <main class="main">
@@ -197,6 +197,7 @@ let clients=[], checks={}, monthKey='';
 let modalMode='add', modalClientId=null, pendingNewClientName=null;
 
 function getMonthKey(){const d=new Date();return d.getFullYear()+'-'+d.getMonth();}
+function getNextMonthName(){const d=new Date();d.setMonth(d.getMonth()+1);return d.toLocaleDateString('en-US',{month:'long',year:'numeric'});}
 function setSyncStatus(s,m){const d=document.getElementById('sync-dot');d.className='sync-dot'+(s==='syncing'?' syncing':s==='error'?' error':'');document.getElementById('sync-label').textContent=m||'Synced ✓';}
 
 async function fetchAll(){
@@ -237,7 +238,7 @@ async function toggleCheck(key,cid,val){
   }
 }
 async function resetMonth(){
-  if(!confirm('Reset all checkboxes for this month?'))return;
+  if(!confirm(`Reset all checkboxes to prepare for ${getNextMonthName()}?`))return;
   await fetch(`${SUPA_URL}/rest/v1/cpt_checks?month_key=eq.${monthKey}`,{method:'DELETE',headers:hdrs});
   checks={};render();
 }
@@ -470,6 +471,7 @@ async function moveClient(cid,dir){
 
 document.getElementById('new-client').addEventListener('keydown',e=>{if(e.key==='Enter')openAddModal();});
 const now=new Date();
+monthKey=getMonthKey();
 document.getElementById('month-label').textContent=now.toLocaleDateString('en-US',{month:'long',year:'numeric'});
 fetchAll();
 </script>
