@@ -2,310 +2,130 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
- <link rel="icon" type="image/x-icon" href="favicon.ico" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Content Publishing Tracker | McLeod Real Estate Consulting</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --navy:       #1B2D6B;
-    --navy-light: #2a3f8f;
-    --blue:       #3B6FA0;
-    --teal:       #5BB8D4;
-    --teal-light: #9DD8EA;
-    --teal-pale:  #D6F0F7;
-    --gray-bg:    #E8EDF2;
-    --gray-mid:   #C8D3DC;
-    --white:      #ffffff;
-    --text:       #1B2D6B;
-    --text-mid:   #3B6FA0;
-    --text-muted: #6B8BAA;
-    --border:     rgba(27,45,107,0.15);
-    --border-md:  rgba(27,45,107,0.25);
-    --radius-md:  8px;
-    --radius-lg:  12px;
-    --success:    #2e7d32;
+    --navy: #1B2D6B; --navy-light: #2a3f8f; --blue: #3B6FA0;
+    --teal: #5BB8D4; --teal-light: #9DD8EA; --teal-pale: #D6F0F7;
+    --gray-bg: #E8EDF2; --gray-mid: #C8D3DC; --white: #ffffff;
+    --text: #1B2D6B; --text-mid: #3B6FA0; --text-muted: #6B8BAA;
+    --border: rgba(27,45,107,0.15); --border-md: rgba(27,45,107,0.25);
+    --radius-md: 8px; --radius-lg: 12px; --success: #2e7d32;
+    --gold: #E5A820;
   }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--gray-bg); color: var(--text); min-height: 100vh; }
 
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--gray-bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding: 0;
-  }
-
-  /* HEADER BANNER */
-  .site-header {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, var(--teal) 100%);
-    padding: 1.25rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .site-header h1 {
-    color: var(--white);
-    font-size: 20px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    letter-spacing: 0.01em;
-  }
-
+  /* HEADER */
+  .site-header { background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, var(--teal) 100%); padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .site-header h1 { color: var(--white); font-size: 20px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
   .site-header h1 i { font-size: 22px; color: var(--teal-light); }
-
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .month-badge {
-    background: rgba(255,255,255,0.15);
-    color: var(--white);
-    font-size: 13px;
-    padding: 5px 14px;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.3);
-    backdrop-filter: blur(4px);
-  }
-
-  .btn-reset {
-    font-size: 12px;
-    color: rgba(255,255,255,0.7);
-    background: none;
-    border: 1px solid rgba(255,255,255,0.25);
-    border-radius: 20px;
-    cursor: pointer;
-    padding: 5px 12px;
-    transition: all 0.15s;
-  }
+  .header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .month-badge { background: rgba(255,255,255,0.15); color: var(--white); font-size: 13px; padding: 5px 14px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.3); }
+  .sync-badge { font-size: 12px; color: rgba(255,255,255,0.8); display: flex; align-items: center; gap: 5px; }
+  .sync-dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; }
+  .sync-dot.syncing { background: var(--gold); animation: pulse 1s infinite; }
+  .sync-dot.error { background: #f87171; }
+  @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
+  .btn-reset { font-size: 12px; color: rgba(255,255,255,0.7); background: none; border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; cursor: pointer; padding: 5px 12px; transition: all 0.15s; }
   .btn-reset:hover { background: rgba(255,255,255,0.15); color: var(--white); }
 
-  /* MAIN */
-  .main { padding: 1.5rem 1.25rem; max-width: 960px; margin: 0 auto; }
+  .main { padding: 1.5rem 1.25rem; max-width: 980px; margin: 0 auto; }
 
-  /* SUMMARY STATS */
-  .summary {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 10px;
-    margin-bottom: 1.25rem;
-  }
-
-  .stat {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    padding: 14px 16px;
-    border-left: 4px solid var(--teal);
-    box-shadow: 0 1px 3px rgba(27,45,107,0.08);
-  }
+  /* SUMMARY */
+  .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 10px; margin-bottom: 1.25rem; }
+  .stat { background: var(--white); border-radius: var(--radius-lg); padding: 14px 16px; border-left: 4px solid var(--teal); box-shadow: 0 1px 3px rgba(27,45,107,0.08); }
   .stat:nth-child(2) { border-left-color: var(--navy); }
   .stat:nth-child(3) { border-left-color: var(--blue); }
   .stat:nth-child(4) { border-left-color: var(--teal-light); }
-
   .stat-val { font-size: 26px; font-weight: 600; color: var(--navy); }
   .stat-lbl { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
 
   /* ADD CLIENT */
-  .add-bar {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    padding: 1rem 1.25rem;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-    box-shadow: 0 1px 3px rgba(27,45,107,0.08);
-    border: 0.5px solid var(--border);
-  }
-
-  .add-bar input {
-    font-size: 14px;
-    padding: 8px 12px;
-    border-radius: var(--radius-md);
-    border: 1.5px solid var(--gray-mid);
-    color: var(--text);
-    flex: 1;
-    min-width: 180px;
-    max-width: 300px;
-    outline: none;
-    transition: border-color 0.15s;
-  }
+  .add-bar { background: var(--white); border-radius: var(--radius-lg); padding: 1rem 1.25rem; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(27,45,107,0.08); border: 0.5px solid var(--border); }
+  .add-bar input { font-size: 14px; padding: 8px 12px; border-radius: var(--radius-md); border: 1.5px solid var(--gray-mid); color: var(--text); flex: 1; min-width: 180px; max-width: 300px; outline: none; transition: border-color 0.15s; }
   .add-bar input:focus { border-color: var(--teal); }
-
-  .btn-add {
-    font-size: 13px;
-    padding: 8px 18px;
-    border-radius: var(--radius-md);
-    border: none;
-    background: var(--navy);
-    color: var(--white);
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: 500;
-    transition: background 0.15s;
-  }
+  .btn-add { font-size: 13px; padding: 8px 18px; border-radius: var(--radius-md); border: none; background: var(--navy); color: var(--white); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-weight: 500; transition: background 0.15s; }
   .btn-add:hover { background: var(--navy-light); }
-  .btn-add:active { transform: scale(0.98); }
 
   /* CLIENT CARDS */
-  .clients-list { display: flex; flex-direction: column; gap: 10px; }
+  .clients-list { display: flex; flex-direction: column; gap: 12px; }
+  .client-card { background: var(--white); border-radius: var(--radius-lg); border: 0.5px solid var(--border); box-shadow: 0 1px 3px rgba(27,45,107,0.07); overflow: hidden; }
+  .client-card.dragging { opacity: 0.5; }
+  .client-card.drag-over { border: 2px dashed var(--teal); }
 
-  .client-card {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    border: 0.5px solid var(--border);
-    box-shadow: 0 1px 3px rgba(27,45,107,0.07);
-    overflow: hidden;
-    transition: box-shadow 0.15s;
-  }
-  .client-card.dragging {
-    opacity: 0.5;
-    box-shadow: 0 8px 24px rgba(27,45,107,0.2);
-  }
-  .client-card.drag-over {
-    border: 2px dashed var(--teal);
-  }
-
-  /* CLIENT CARD HEADER */
-  .card-header {
-    background: linear-gradient(90deg, var(--navy) 0%, var(--blue) 100%);
-    padding: 10px 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .drag-handle {
-    color: rgba(255,255,255,0.5);
-    cursor: grab;
-    font-size: 16px;
-    padding: 2px 4px;
-    border-radius: 4px;
-    transition: color 0.12s;
-    flex-shrink: 0;
-  }
+  .card-header { background: linear-gradient(90deg, var(--navy) 0%, var(--blue) 100%); padding: 10px 14px; display: flex; align-items: center; gap: 10px; }
+  .drag-handle { color: rgba(255,255,255,0.5); cursor: grab; font-size: 16px; padding: 2px 4px; border-radius: 4px; transition: color 0.12s; flex-shrink: 0; }
   .drag-handle:hover { color: var(--white); }
-  .drag-handle:active { cursor: grabbing; }
-
-  .avatar {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.2);
-    border: 2px solid rgba(255,255,255,0.4);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 600; color: var(--white);
-    flex-shrink: 0;
-  }
-
+  .avatar { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.4); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: var(--white); flex-shrink: 0; }
   .card-name { font-weight: 600; font-size: 15px; color: var(--white); flex: 1; }
-
-  .card-progress {
-    display: flex; align-items: center; gap: 8px;
-  }
-  .prog-bar {
-    width: 80px; height: 5px;
-    background: rgba(255,255,255,0.2);
-    border-radius: 3px; overflow: hidden;
-  }
+  .card-progress { display: flex; align-items: center; gap: 8px; }
+  .prog-bar { width: 80px; height: 5px; background: rgba(255,255,255,0.2); border-radius: 3px; overflow: hidden; }
   .prog-fill { height: 100%; background: var(--teal-light); border-radius: 3px; transition: width 0.2s; }
   .prog-pct { font-size: 12px; color: rgba(255,255,255,0.8); min-width: 30px; }
-
   .move-btns { display: flex; gap: 2px; }
-  .move-btn {
-    background: rgba(255,255,255,0.12);
-    border: none; border-radius: 4px;
-    color: rgba(255,255,255,0.7);
-    cursor: pointer; padding: 3px 6px; font-size: 13px;
-    transition: background 0.12s, color 0.12s;
-  }
+  .move-btn { background: rgba(255,255,255,0.12); border: none; border-radius: 4px; color: rgba(255,255,255,0.7); cursor: pointer; padding: 3px 6px; font-size: 13px; transition: all 0.12s; }
   .move-btn:hover { background: rgba(255,255,255,0.25); color: var(--white); }
-
-  .del-btn {
-    background: rgba(255,255,255,0.1);
-    border: none; border-radius: 4px;
-    color: rgba(255,255,255,0.5);
-    cursor: pointer; padding: 3px 7px; font-size: 14px;
-    transition: background 0.12s, color 0.12s;
-    flex-shrink: 0;
-  }
+  .edit-svc-btn { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 6px; color: rgba(255,255,255,0.8); cursor: pointer; padding: 3px 10px; font-size: 12px; transition: all 0.12s; white-space: nowrap; }
+  .edit-svc-btn:hover { background: rgba(255,255,255,0.25); color: var(--white); }
+  .del-btn { background: rgba(255,255,255,0.1); border: none; border-radius: 4px; color: rgba(255,255,255,0.5); cursor: pointer; padding: 3px 7px; font-size: 14px; transition: all 0.12s; flex-shrink: 0; }
   .del-btn:hover { background: rgba(220,50,50,0.35); color: var(--white); }
+
+  /* SERVICE EDITOR */
+  .svc-editor { background: var(--teal-pale); border-top: 1px solid var(--border); padding: 14px 16px; display: none; }
+  .svc-editor.open { display: block; }
+  .svc-editor-title { font-size: 12px; font-weight: 600; color: var(--navy); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
+  .svc-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .svc-chip { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; padding: 5px 12px; border-radius: 20px; border: 1.5px solid var(--blue); background: var(--white); color: var(--blue); cursor: pointer; transition: all 0.12s; user-select: none; }
+  .svc-chip.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+  .svc-chip i { font-size: 13px; }
+  .blog-count-row { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-mid); }
+  .blog-count-row input[type=number] { width: 60px; padding: 5px 8px; border: 1.5px solid var(--gray-mid); border-radius: 6px; font-size: 14px; text-align: center; outline: none; }
+  .blog-count-row input:focus { border-color: var(--teal); }
+  .svc-save-btn { margin-top: 10px; font-size: 13px; padding: 7px 20px; border-radius: var(--radius-md); border: none; background: var(--navy); color: var(--white); cursor: pointer; font-weight: 500; transition: background 0.15s; }
+  .svc-save-btn:hover { background: var(--navy-light); }
 
   /* TABLE */
   .card-body { padding: 0; }
-
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
-
-  .section-label td {
-    background: var(--teal-pale);
-    color: var(--navy);
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    padding: 5px 14px;
-    border-top: 0.5px solid var(--border);
-  }
-
+  .section-label td { background: var(--teal-pale); color: var(--navy); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; padding: 5px 14px; border-top: 0.5px solid var(--border); }
   tbody tr.data-row { border-bottom: 0.5px solid var(--border); }
   tbody tr.data-row:last-child { border-bottom: none; }
   tbody tr.data-row:hover { background: #f5f9fc; }
-
   td { padding: 7px 10px; vertical-align: middle; text-align: center; }
   td.col-label { text-align: left; padding-left: 20px; font-size: 12px; color: var(--text-mid); width: 140px; }
-
-  thead.col-heads th {
-    font-size: 11px; font-weight: 600; color: var(--text-muted);
-    text-transform: uppercase; letter-spacing: 0.04em;
-    padding: 6px 10px;
-    background: #f0f5f9;
-    border-bottom: 1px solid var(--border-md);
-    text-align: center;
-    white-space: nowrap;
-  }
+  thead.col-heads th { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; padding: 6px 10px; background: #f0f5f9; border-bottom: 1px solid var(--border-md); text-align: center; white-space: nowrap; }
   thead.col-heads th.col-label { text-align: left; padding-left: 20px; }
-
-  input[type="checkbox"] {
-    width: 17px; height: 17px;
-    cursor: pointer;
-    accent-color: var(--navy);
-  }
-
-  .monthly-row td { background: #fafcff; }
+  input[type="checkbox"] { width: 17px; height: 17px; cursor: pointer; accent-color: var(--navy); }
   .monthly-check { display: flex; align-items: center; gap: 8px; }
   .monthly-status { font-size: 12px; color: var(--text-muted); }
   .done-status { color: var(--success); font-weight: 500; }
+  .no-services { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 13px; }
 
-  .empty-state {
-    text-align: center; padding: 3rem 1rem;
-    color: var(--text-muted); font-size: 14px;
-  }
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--white); border-radius: var(--radius-lg); padding: 1.5rem; width: 90%; max-width: 480px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+  .modal h3 { font-size: 17px; color: var(--navy); margin-bottom: 1rem; }
+  .modal-svc-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1rem; }
+  .modal-blog-row { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-mid); margin-bottom: 1rem; }
+  .modal-blog-row input { width: 60px; padding: 5px 8px; border: 1.5px solid var(--gray-mid); border-radius: 6px; font-size: 14px; text-align: center; outline: none; }
+  .modal-blog-row input:focus { border-color: var(--teal); }
+  .modal-btns { display: flex; gap: 8px; justify-content: flex-end; }
+  .modal-btn-primary { font-size: 14px; padding: 8px 22px; border-radius: var(--radius-md); border: none; background: var(--navy); color: var(--white); cursor: pointer; font-weight: 500; }
+  .modal-btn-primary:hover { background: var(--navy-light); }
+  .modal-btn-cancel { font-size: 14px; padding: 8px 16px; border-radius: var(--radius-md); border: 1px solid var(--gray-mid); background: none; color: var(--text-mid); cursor: pointer; }
+
+  .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-muted); font-size: 14px; }
   .empty-state i { font-size: 40px; display: block; margin-bottom: 10px; color: var(--gray-mid); }
-
-  /* FOOTER */
-  .site-footer {
-    text-align: center;
-    padding: 1.5rem;
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: 1rem;
-  }
+  .site-footer { text-align: center; padding: 1.5rem; font-size: 12px; color: var(--text-muted); margin-top: 1rem; }
 
   @media (max-width: 600px) {
     .site-header { padding: 1rem; }
     .main { padding: 1rem 0.75rem; }
-    table { min-width: 500px; }
+    table { min-width: 400px; }
     .card-body { overflow-x: auto; }
   }
 </style>
@@ -313,264 +133,436 @@
 <body>
 
 <header class="site-header">
-  <h1>
-    <i class="ti ti-calendar-check" aria-hidden="true"></i>
-    Content Publishing Tracker
-  </h1>
+  <h1><i class="ti ti-calendar-check" aria-hidden="true"></i>Content Publishing Tracker</h1>
   <div class="header-right">
+    <div class="sync-badge"><div class="sync-dot" id="sync-dot"></div><span id="sync-label">Synced ✓</span></div>
     <span class="month-badge" id="month-label"></span>
-    <button class="btn-reset" onclick="resetMonth()">
-      <i class="ti ti-refresh" aria-hidden="true" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>Reset month
-    </button>
+    <button class="btn-reset" onclick="resetMonth()"><i class="ti ti-refresh" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>Reset month</button>
   </div>
 </header>
 
 <main class="main">
-  <h2 class="sr-only">Monthly content publishing checklist by client</h2>
-
   <div class="summary" id="summary"></div>
-
   <div class="add-bar">
-    <input type="text" id="new-client" placeholder="Add a client..." aria-label="New client name" />
-    <button class="btn-add" onclick="addClient()">
-      <i class="ti ti-plus" aria-hidden="true"></i> Add client
-    </button>
+    <input type="text" id="new-client" placeholder="Client name..." aria-label="New client name" />
+    <button class="btn-add" onclick="openAddModal()"><i class="ti ti-plus"></i> Add client</button>
   </div>
-
   <div class="clients-list" id="clients-list"></div>
-
-  <div class="site-footer">McLeod Real Estate Consulting &nbsp;·&nbsp; Content resets each month automatically</div>
+  <div class="site-footer">McLeod Real Estate Consulting · Content resets each month automatically</div>
 </main>
 
+<!-- ADD CLIENT MODAL -->
+<div class="modal-overlay" id="add-modal">
+  <div class="modal">
+    <h3>Configure client services</h3>
+    <div id="modal-client-name" style="font-size:15px;font-weight:600;color:var(--navy);margin-bottom:12px;"></div>
+    <div style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">Select deliverables</div>
+    <div class="modal-svc-grid" id="modal-svc-grid"></div>
+    <div class="modal-blog-row" id="modal-blog-row" style="display:none">
+      <label for="modal-blog-count">Number of blogs per month:</label>
+      <input type="number" id="modal-blog-count" min="0" max="12" value="4" />
+    </div>
+    <div class="modal-btns">
+      <button class="modal-btn-cancel" onclick="closeAddModal()">Cancel</button>
+      <button class="modal-btn-primary" onclick="confirmAddClient()">Add client</button>
+    </div>
+  </div>
+</div>
+
 <script>
-const BLOG_COUNT = 5;
-const COLS = ['site','gmb','fb','ig'];
-const COL_HEADS = ['Website','Google My Business','Facebook','Instagram'];
+const SUPA_URL='https://egqyhhqtcpssdwolbtvd.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVncXloaHF0Y3Bzc2R3b2xidHZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwMjE4NjAsImV4cCI6MjA5NjU5Nzg2MH0.AYzOBpIj4RdbLxrKf_IEQOEurbxDVWtKra_jVZrHKPg';
+const hdrs={'apikey':SUPA_KEY,'Authorization':`Bearer ${SUPA_KEY}`,'Content-Type':'application/json','Prefer':'return=representation'};
 
-function getMonthKey() {
-  const d = new Date();
-  return d.getFullYear() + '-' + d.getMonth();
+const ALL_SERVICES = [
+  {id:'newsletter',  label:'Newsletter',        icon:'ti-mail'},
+  {id:'market',      label:'Market Report',     icon:'ti-chart-bar'},
+  {id:'blog',        label:'Blog',              icon:'ti-pencil'},
+  {id:'facebook',    label:'Facebook',          icon:'ti-brand-facebook'},
+  {id:'instagram',   label:'Instagram',         icon:'ti-brand-instagram'},
+  {id:'tiktok',      label:'TikTok',            icon:'ti-brand-tiktok'},
+  {id:'email_blast', label:'Email Blasts',      icon:'ti-send'},
+  {id:'holiday',     label:'Holiday Flyers',    icon:'ti-confetti'},
+  {id:'website',     label:'Website Updates',   icon:'ti-world'},
+  {id:'gmb',         label:'Google My Business',icon:'ti-map-pin'},
+];
+
+// Social/per-blog columns
+const BLOG_SOCIAL_COLS = ['facebook','instagram','tiktok','website','gmb'];
+
+let clients = [];
+let checks = {};
+let monthKey = '';
+let pendingNewClient = null;
+let modalSelectedSvcs = new Set();
+
+function getMonthKey(){
+  const d=new Date();
+  return d.getFullYear()+'-'+d.getMonth();
 }
 
-function load() {
-  try { return JSON.parse(localStorage.getItem('cpt_v4') || 'null'); } catch { return null; }
-}
-function save() {
-  try { localStorage.setItem('cpt_v4', JSON.stringify(state)); } catch {}
-}
-
-let state = load() || { clients: [], checks: {}, month: getMonthKey() };
-if (state.month !== getMonthKey()) {
-  state.checks = {};
-  state.month = getMonthKey();
-  save();
+function setSyncStatus(state,msg){
+  const dot=document.getElementById('sync-dot');
+  dot.className='sync-dot'+(state==='syncing'?' syncing':state==='error'?' error':'');
+  document.getElementById('sync-label').textContent=msg||'Synced ✓';
 }
 
-function initials(name) {
-  return name.trim().split(/\s+/).map(w => w[0]||'').join('').slice(0,2).toUpperCase();
+async function fetchAll(){
+  setSyncStatus('syncing','Loading...');
+  monthKey=getMonthKey();
+  try{
+    const [cl,ch]=await Promise.all([
+      fetch(`${SUPA_URL}/rest/v1/cpt_clients?select=*&order=sort_order.asc`,{headers:hdrs}).then(r=>r.json()),
+      fetch(`${SUPA_URL}/rest/v1/cpt_checks?select=*&month_key=eq.${monthKey}`,{headers:hdrs}).then(r=>r.json()),
+    ]);
+    clients=Array.isArray(cl)?cl:[];
+    checks={};
+    if(Array.isArray(ch)) ch.forEach(c=>{checks[c.check_key]=true;});
+    setSyncStatus('ok','Synced ✓');
+    render();
+  }catch(e){setSyncStatus('error','Sync error');console.error(e);}
 }
 
-function ck(cid, type, blog) {
-  return blog != null ? `${cid}_b${blog}_${type}` : `${cid}_${type}`;
+async function saveClient(client){
+  setSyncStatus('syncing','Saving...');
+  try{
+    await fetch(`${SUPA_URL}/rest/v1/cpt_clients`,{method:'POST',headers:hdrs,body:JSON.stringify(client)});
+    setSyncStatus('ok','Synced ✓');
+  }catch(e){setSyncStatus('error','Sync error');}
 }
-function isChecked(key) { return !!state.checks[key]; }
 
-function clientProgress(cid) {
-  let done = 0, total = 0;
-  for (let b = 1; b <= BLOG_COUNT; b++) {
-    COLS.forEach(t => { total++; if (isChecked(ck(cid, t, b))) done++; });
+async function updateClient(client){
+  setSyncStatus('syncing','Saving...');
+  try{
+    await fetch(`${SUPA_URL}/rest/v1/cpt_clients?id=eq.${client.id}`,{method:'PATCH',headers:hdrs,body:JSON.stringify({deliverables:client.deliverables,blog_count:client.blog_count})});
+    setSyncStatus('ok','Synced ✓');
+  }catch(e){setSyncStatus('error','Sync error');}
+}
+
+async function patchOrder(){
+  try{
+    await Promise.all(clients.map((c,i)=>fetch(`${SUPA_URL}/rest/v1/cpt_clients?id=eq.${c.id}`,{method:'PATCH',headers:hdrs,body:JSON.stringify({sort_order:i})})));
+  }catch(e){}
+}
+
+async function deleteClient(cid){
+  try{
+    await fetch(`${SUPA_URL}/rest/v1/cpt_clients?id=eq.${cid}`,{method:'DELETE',headers:hdrs});
+    await fetch(`${SUPA_URL}/rest/v1/cpt_checks?client_id=eq.${cid}`,{method:'DELETE',headers:hdrs});
+  }catch(e){}
+}
+
+async function toggleCheck(checkKey, clientId, val){
+  checks[checkKey]=val;
+  renderSummary();
+  try{
+    if(val){
+      await fetch(`${SUPA_URL}/rest/v1/cpt_checks`,{method:'POST',headers:{...hdrs,'Prefer':'return=minimal,resolution=merge-duplicates'},body:JSON.stringify({id:clientId+'_'+monthKey+'_'+checkKey,client_id:clientId,month_key:monthKey,check_key:checkKey,checked:true})});
+    }else{
+      await fetch(`${SUPA_URL}/rest/v1/cpt_checks?check_key=eq.${checkKey}&month_key=eq.${monthKey}&client_id=eq.${clientId}`,{method:'DELETE',headers:hdrs});
+    }
+  }catch(e){}
+}
+
+async function resetMonth(){
+  if(!confirm('Reset all checkboxes for this month?'))return;
+  setSyncStatus('syncing','Resetting...');
+  try{
+    await fetch(`${SUPA_URL}/rest/v1/cpt_checks?month_key=eq.${monthKey}`,{method:'DELETE',headers:hdrs});
+    checks={};setSyncStatus('ok','Synced ✓');render();
+  }catch(e){setSyncStatus('error','Sync error');}
+}
+
+function clientProgress(client){
+  const svcs=client.deliverables||[];
+  let done=0,total=0;
+  // blogs
+  if(svcs.includes('blog')&&client.blog_count>0){
+    const blogCols=BLOG_SOCIAL_COLS.filter(s=>svcs.includes(s));
+    for(let b=1;b<=client.blog_count;b++){
+      if(blogCols.length>0){
+        blogCols.forEach(()=>{total++;});
+        blogCols.forEach(col=>{if(checks[`${client.id}_b${b}_${col}`])done++;});
+      } else {
+        total++;
+        if(checks[`${client.id}_b${b}_done`])done++;
+      }
+    }
   }
-  ['market','newsletter'].forEach(t => { total++; if (isChecked(ck(cid, t))) done++; });
-  return { done, total };
+  // monthly singles
+  ['newsletter','market','email_blast','holiday','website','gmb'].forEach(s=>{
+    if(svcs.includes(s)){total++;if(checks[`${client.id}_${s}`])done++;}
+  });
+  // standalone social (no blog)
+  if(!svcs.includes('blog')){
+    ['facebook','instagram','tiktok'].forEach(s=>{
+      if(svcs.includes(s)){total++;if(checks[`${client.id}_${s}`])done++;}
+    });
+  }
+  return{done,total};
 }
 
-function renderSummary() {
-  let done = 0, total = 0;
-  state.clients.forEach(c => {
-    const p = clientProgress(c.id);
-    done += p.done; total += p.total;
-  });
-  const pct = total ? Math.round(done / total * 100) : 0;
-  document.getElementById('summary').innerHTML = `
-    <div class="stat"><div class="stat-val">${state.clients.length}</div><div class="stat-lbl">Active clients</div></div>
-    <div class="stat"><div class="stat-val">${done}</div><div class="stat-lbl">Tasks complete</div></div>
-    <div class="stat"><div class="stat-val">${total - done}</div><div class="stat-lbl">Tasks remaining</div></div>
+function renderSummary(){
+  let totalDone=0,totalTasks=0;
+  clients.forEach(c=>{const p=clientProgress(c);totalDone+=p.done;totalTasks+=p.total;});
+  const pct=totalTasks?Math.round(totalDone/totalTasks*100):0;
+  document.getElementById('summary').innerHTML=`
+    <div class="stat"><div class="stat-val">${clients.length}</div><div class="stat-lbl">Active clients</div></div>
+    <div class="stat"><div class="stat-val">${totalDone}</div><div class="stat-lbl">Tasks complete</div></div>
+    <div class="stat"><div class="stat-val">${totalTasks-totalDone}</div><div class="stat-lbl">Tasks remaining</div></div>
     <div class="stat"><div class="stat-val">${pct}%</div><div class="stat-lbl">Month complete</div></div>
   `;
 }
 
-function renderClients() {
-  const list = document.getElementById('clients-list');
-  list.innerHTML = '';
+function initials(name){return name.trim().split(/\s+/).map(w=>w[0]||'').join('').slice(0,2).toUpperCase();}
+function esc(str){return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
-  if (!state.clients.length) {
-    list.innerHTML = `<div class="empty-state"><i class="ti ti-users" aria-hidden="true"></i>No clients yet — add one above to get started</div>`;
-    renderSummary(); return;
+function render(){
+  renderSummary();
+  const list=document.getElementById('clients-list');
+  list.innerHTML='';
+  if(!clients.length){
+    list.innerHTML='<div class="empty-state"><i class="ti ti-users"></i>No clients yet — add one above to get started</div>';
+    return;
   }
-
-  state.clients.forEach((client, idx) => {
-    const cid = client.id;
-    const prog = clientProgress(cid);
-    const pct = prog.total ? Math.round(prog.done / prog.total * 100) : 0;
-
-    const card = document.createElement('div');
-    card.className = 'client-card';
-    card.draggable = true;
-    card.dataset.id = cid;
+  clients.forEach((client,idx)=>{
+    const svcs=client.deliverables||[];
+    const prog=clientProgress(client);
+    const pct=prog.total?Math.round(prog.done/prog.total*100):0;
+    const card=document.createElement('div');
+    card.className='client-card';
+    card.draggable=true;
+    card.dataset.id=client.id;
 
     // HEADER
-    const hdr = document.createElement('div');
-    hdr.className = 'card-header';
-    hdr.innerHTML = `
-      <span class="drag-handle" title="Drag to reorder" aria-hidden="true"><i class="ti ti-grip-vertical"></i></span>
+    const hdr=document.createElement('div');
+    hdr.className='card-header';
+    hdr.innerHTML=`
+      <span class="drag-handle" title="Drag to reorder"><i class="ti ti-grip-vertical"></i></span>
       <div class="avatar">${initials(client.name)}</div>
-      <span class="card-name">${escHtml(client.name)}</span>
+      <span class="card-name">${esc(client.name)}</span>
       <div class="card-progress">
         <div class="prog-bar"><div class="prog-fill" style="width:${pct}%"></div></div>
         <span class="prog-pct">${pct}%</span>
       </div>
+      <button class="edit-svc-btn" onclick="toggleSvcEditor('${client.id}')"><i class="ti ti-settings" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>Services</button>
       <div class="move-btns">
-        <button class="move-btn" onclick="moveClient('${cid}',-1)" title="Move up" aria-label="Move ${escHtml(client.name)} up"><i class="ti ti-chevron-up"></i></button>
-        <button class="move-btn" onclick="moveClient('${cid}',1)" title="Move down" aria-label="Move ${escHtml(client.name)} down"><i class="ti ti-chevron-down"></i></button>
+        <button class="move-btn" onclick="moveClient('${client.id}',-1)"><i class="ti ti-chevron-up"></i></button>
+        <button class="move-btn" onclick="moveClient('${client.id}',1)"><i class="ti ti-chevron-down"></i></button>
       </div>
-      <button class="del-btn" onclick="removeClient('${cid}')" title="Remove client" aria-label="Remove ${escHtml(client.name)}"><i class="ti ti-trash"></i></button>
+      <button class="del-btn" onclick="removeClient('${client.id}')"><i class="ti ti-trash"></i></button>
     `;
     card.appendChild(hdr);
 
-    // BODY TABLE
-    const body = document.createElement('div');
-    body.className = 'card-body';
-
-    const table = document.createElement('table');
-    table.innerHTML = `
-      <thead class="col-heads">
-        <tr>
-          <th class="col-label">Content</th>
-          ${COL_HEADS.map(h => `<th>${h}</th>`).join('')}
-        </tr>
-      </thead>
-      <tbody id="tbody_${cid}"></tbody>
+    // SERVICE EDITOR (inline)
+    const svcEd=document.createElement('div');
+    svcEd.className='svc-editor';
+    svcEd.id=`svc-ed-${client.id}`;
+    const hasBlog=svcs.includes('blog');
+    svcEd.innerHTML=`
+      <div class="svc-editor-title">Edit services for ${esc(client.name)}</div>
+      <div class="svc-grid">${ALL_SERVICES.map(s=>`
+        <div class="svc-chip${svcs.includes(s.id)?' active':''}" data-svc="${s.id}" data-cid="${client.id}" onclick="toggleSvcChip(this,'${client.id}')">
+          <i class="ti ${s.icon}"></i>${s.label}
+        </div>`).join('')}
+      </div>
+      <div class="blog-count-row" id="bcr-${client.id}" style="display:${hasBlog?'flex':'none'}">
+        <label>Blogs per month:</label>
+        <input type="number" id="bc-${client.id}" min="0" max="12" value="${client.blog_count||4}" />
+      </div>
+      <button class="svc-save-btn" onclick="saveSvcEditor('${client.id}')">Save services</button>
     `;
-    body.appendChild(table);
+    card.appendChild(svcEd);
+
+    // TABLE
+    const body=document.createElement('div');
+    body.className='card-body';
+    if(!svcs.length){
+      body.innerHTML='<div class="no-services"><i class="ti ti-settings" style="margin-right:5px"></i>No services configured — click Services to set up</div>';
+    } else {
+      const blogCols=BLOG_SOCIAL_COLS.filter(s=>svcs.includes(s));
+      const hasBlogSection=svcs.includes('blog')&&client.blog_count>0;
+      const standaloneSocial=['facebook','instagram','tiktok'].filter(s=>svcs.includes(s)&&!svcs.includes('blog'));
+      const monthlySingles=['newsletter','market','email_blast','holiday','website','gmb'].filter(s=>svcs.includes(s));
+
+      let colHeads=['Content'];
+      let showBlogCols=false;
+      if(hasBlogSection&&blogCols.length>0){
+        showBlogCols=true;
+        colHeads=[...colHeads,...blogCols.map(c=>ALL_SERVICES.find(s=>s.id===c).label)];
+      }
+
+      const table=document.createElement('table');
+      if(showBlogCols){
+        table.innerHTML=`<thead class="col-heads"><tr>${colHeads.map((h,i)=>`<th${i===0?' class="col-label"':''}>${h}</th>`).join('')}</tr></thead><tbody id="tbody-${client.id}"></tbody>`;
+      } else {
+        table.innerHTML=`<tbody id="tbody-${client.id}"></tbody>`;
+      }
+      body.appendChild(table);
+      const tbody=table.querySelector('tbody');
+
+      // Blog rows
+      if(hasBlogSection){
+        const blogSec=document.createElement('tr');
+        blogSec.className='section-label';
+        blogSec.innerHTML=`<td colspan="${colHeads.length}">Blogs — ${client.blog_count} per month</td>`;
+        tbody.appendChild(blogSec);
+
+        for(let b=1;b<=client.blog_count;b++){
+          const row=document.createElement('tr');
+          row.className='data-row';
+          if(blogCols.length>0){
+            let cells=`<td class="col-label">Blog ${b}</td>`;
+            blogCols.forEach(col=>{
+              const key=`${client.id}_b${b}_${col}`;
+              cells+=`<td><input type="checkbox" ${checks[key]?'checked':''} onchange="toggleCheck('${key}','${client.id}',this.checked)" /></td>`;
+            });
+            row.innerHTML=cells;
+          } else {
+            const key=`${client.id}_b${b}_done`;
+            row.innerHTML=`<td class="col-label">Blog ${b}</td><td style="text-align:left;padding-left:14px"><div class="monthly-check"><input type="checkbox" ${checks[key]?'checked':''} onchange="toggleCheck('${key}','${client.id}',this.checked)" /><span class="monthly-status ${checks[key]?'done-status':''}">${checks[key]?'Done':'Pending'}</span></div></td>`;
+          }
+          tbody.appendChild(row);
+        }
+      }
+
+      // Standalone social
+      if(standaloneSocial.length>0){
+        const sec=document.createElement('tr');sec.className='section-label';
+        sec.innerHTML=`<td colspan="2">Social Media</td>`;tbody.appendChild(sec);
+        standaloneSocial.forEach(s=>{
+          const svc=ALL_SERVICES.find(x=>x.id===s);
+          const key=`${client.id}_${s}`;
+          const done=checks[key];
+          const row=document.createElement('tr');row.className='data-row monthly-row';
+          row.innerHTML=`<td class="col-label">${svc.label}</td><td style="text-align:left;padding-left:14px"><div class="monthly-check"><input type="checkbox" ${done?'checked':''} onchange="toggleCheck('${key}','${client.id}',this.checked)" /><span class="monthly-status ${done?'done-status':''}">${done?'Done':'Pending'}</span></div></td>`;
+          tbody.appendChild(row);
+        });
+      }
+
+      // Monthly singles
+      if(monthlySingles.length>0){
+        const sec=document.createElement('tr');sec.className='section-label';
+        sec.innerHTML=`<td colspan="2">Monthly Deliverables</td>`;tbody.appendChild(sec);
+        monthlySingles.forEach(s=>{
+          const svc=ALL_SERVICES.find(x=>x.id===s);
+          const key=`${client.id}_${s}`;
+          const done=checks[key];
+          const row=document.createElement('tr');row.className='data-row monthly-row';
+          row.innerHTML=`<td class="col-label">${svc.label}</td><td style="text-align:left;padding-left:14px"><div class="monthly-check"><input type="checkbox" ${done?'checked':''} onchange="toggleCheck('${key}','${client.id}',this.checked)" /><span class="monthly-status ${done?'done-status':''}">${done?'Done':'Pending'}</span></div></td>`;
+          tbody.appendChild(row);
+        });
+      }
+    }
     card.appendChild(body);
 
-    const tbody = table.querySelector('tbody');
-
-    // Blog section label
-    const blogSec = document.createElement('tr');
-    blogSec.className = 'section-label';
-    blogSec.innerHTML = `<td colspan="${1 + COLS.length}">Blogs — ${BLOG_COUNT} per month</td>`;
-    tbody.appendChild(blogSec);
-
-    for (let b = 1; b <= BLOG_COUNT; b++) {
-      const row = document.createElement('tr');
-      row.className = 'data-row';
-      let cells = `<td class="col-label">Blog ${b}</td>`;
-      COLS.forEach((t, ti) => {
-        const key = ck(cid, t, b);
-        cells += `<td><input type="checkbox" ${isChecked(key)?'checked':''} aria-label="Blog ${b} — ${COL_HEADS[ti]}" onchange="toggle('${key}',this.checked)" /></td>`;
-      });
-      row.innerHTML = cells;
-      tbody.appendChild(row);
-    }
-
-    // Monthly section label
-    const monthlySec = document.createElement('tr');
-    monthlySec.className = 'section-label';
-    monthlySec.innerHTML = `<td colspan="${1 + COLS.length}">Monthly deliverables</td>`;
-    tbody.appendChild(monthlySec);
-
-    [['market','Market report'],['newsletter','Newsletter']].forEach(([type, label]) => {
-      const key = ck(cid, type);
-      const done = isChecked(key);
-      const row = document.createElement('tr');
-      row.className = 'data-row monthly-row';
-      row.innerHTML = `
-        <td class="col-label">${label}</td>
-        <td colspan="${COLS.length}" style="text-align:left;padding-left:14px">
-          <div class="monthly-check">
-            <input type="checkbox" ${done?'checked':''} aria-label="${label} sent via Mailchimp" onchange="toggle('${key}',this.checked)" />
-            <span class="monthly-status ${done?'done-status':''}">${done ? 'Sent' : 'Pending'}</span>
-          </div>
-        </td>
-      `;
-      tbody.appendChild(row);
+    // DRAG
+    card.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',client.id);card.classList.add('dragging');});
+    card.addEventListener('dragend',()=>card.classList.remove('dragging'));
+    card.addEventListener('dragover',e=>{e.preventDefault();card.classList.add('drag-over');});
+    card.addEventListener('dragleave',()=>card.classList.remove('drag-over'));
+    card.addEventListener('drop',e=>{
+      e.preventDefault();card.classList.remove('drag-over');
+      const fromId=e.dataTransfer.getData('text/plain');
+      if(fromId===client.id)return;
+      const fi=clients.findIndex(c=>c.id===fromId);
+      const ti=clients.findIndex(c=>c.id===client.id);
+      const[moved]=clients.splice(fi,1);clients.splice(ti,0,moved);
+      patchOrder();render();
     });
 
     list.appendChild(card);
-
-    // DRAG EVENTS
-    card.addEventListener('dragstart', e => {
-      e.dataTransfer.setData('text/plain', cid);
-      card.classList.add('dragging');
-    });
-    card.addEventListener('dragend', () => card.classList.remove('dragging'));
-    card.addEventListener('dragover', e => { e.preventDefault(); card.classList.add('drag-over'); });
-    card.addEventListener('dragleave', () => card.classList.remove('drag-over'));
-    card.addEventListener('drop', e => {
-      e.preventDefault();
-      card.classList.remove('drag-over');
-      const fromId = e.dataTransfer.getData('text/plain');
-      const toId = cid;
-      if (fromId === toId) return;
-      const fromIdx = state.clients.findIndex(c => c.id === fromId);
-      const toIdx = state.clients.findIndex(c => c.id === toId);
-      const [moved] = state.clients.splice(fromIdx, 1);
-      state.clients.splice(toIdx, 0, moved);
-      save(); renderClients();
-    });
   });
-
-  renderSummary();
 }
 
-function toggle(key, val) {
-  state.checks[key] = val;
-  save(); renderClients();
+function toggleSvcEditor(cid){
+  const ed=document.getElementById(`svc-ed-${cid}`);
+  if(ed)ed.classList.toggle('open');
 }
 
-function addClient() {
-  const input = document.getElementById('new-client');
-  const name = input.value.trim();
-  if (!name) return;
-  state.clients.push({ id: 'c_' + Date.now(), name });
-  save(); input.value = ''; renderClients();
+function toggleSvcChip(chip,cid){
+  chip.classList.toggle('active');
+  const hasBlog=[...document.querySelectorAll(`[data-cid="${cid}"].active`)].some(c=>c.dataset.svc==='blog');
+  const bcr=document.getElementById(`bcr-${cid}`);
+  if(bcr)bcr.style.display=hasBlog?'flex':'none';
 }
 
-function removeClient(cid) {
-  if (!confirm('Remove this client?')) return;
-  state.clients = state.clients.filter(c => c.id !== cid);
-  Object.keys(state.checks).forEach(k => { if (k.startsWith(cid)) delete state.checks[k]; });
-  save(); renderClients();
+async function saveSvcEditor(cid){
+  const chips=[...document.querySelectorAll(`[data-cid="${cid}"].active`)];
+  const deliverables=chips.map(c=>c.dataset.svc);
+  const blogCount=parseInt(document.getElementById(`bc-${cid}`)?.value)||0;
+  const client=clients.find(c=>c.id===cid);
+  if(!client)return;
+  client.deliverables=deliverables;
+  client.blog_count=deliverables.includes('blog')?blogCount:0;
+  await updateClient(client);
+  document.getElementById(`svc-ed-${cid}`)?.classList.remove('open');
+  render();
 }
 
-function moveClient(cid, dir) {
-  const idx = state.clients.findIndex(c => c.id === cid);
-  const newIdx = idx + dir;
-  if (newIdx < 0 || newIdx >= state.clients.length) return;
-  const [moved] = state.clients.splice(idx, 1);
-  state.clients.splice(newIdx, 0, moved);
-  save(); renderClients();
+// ADD MODAL
+function openAddModal(){
+  const name=document.getElementById('new-client').value.trim();
+  if(!name)return;
+  pendingNewClient=name;
+  modalSelectedSvcs=new Set();
+  document.getElementById('modal-client-name').textContent=`Client: ${name}`;
+  const grid=document.getElementById('modal-svc-grid');
+  grid.innerHTML=ALL_SERVICES.map(s=>`
+    <div class="svc-chip" data-modal-svc="${s.id}" onclick="toggleModalSvc(this,'${s.id}')">
+      <i class="ti ${s.icon}"></i>${s.label}
+    </div>`).join('');
+  document.getElementById('modal-blog-row').style.display='none';
+  document.getElementById('modal-blog-count').value=4;
+  document.getElementById('add-modal').classList.add('open');
 }
 
-function resetMonth() {
-  if (!confirm('Reset all checkboxes for this month?')) return;
-  state.checks = {}; save(); renderClients();
+function toggleModalSvc(chip,svcId){
+  chip.classList.toggle('active');
+  if(chip.classList.contains('active'))modalSelectedSvcs.add(svcId);
+  else modalSelectedSvcs.delete(svcId);
+  document.getElementById('modal-blog-row').style.display=modalSelectedSvcs.has('blog')?'flex':'none';
 }
 
-function escHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function closeAddModal(){
+  document.getElementById('add-modal').classList.remove('open');
+  pendingNewClient=null;
 }
 
-document.getElementById('new-client').addEventListener('keydown', e => {
-  if (e.key === 'Enter') addClient();
-});
+async function confirmAddClient(){
+  if(!pendingNewClient)return;
+  const deliverables=[...modalSelectedSvcs];
+  const blogCount=deliverables.includes('blog')?parseInt(document.getElementById('modal-blog-count').value)||4:0;
+  const client={id:'c_'+Date.now(),name:pendingNewClient,sort_order:clients.length,deliverables,blog_count:blogCount,added:new Date().toISOString().split('T')[0]};
+  clients.push(client);
+  await saveClient(client);
+  document.getElementById('new-client').value='';
+  closeAddModal();
+  render();
+}
 
-const now = new Date();
-document.getElementById('month-label').textContent =
-  now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+async function removeClient(cid){
+  if(!confirm('Remove this client?'))return;
+  clients=clients.filter(c=>c.id!==cid);
+  Object.keys(checks).forEach(k=>{if(k.startsWith(cid))delete checks[k];});
+  await deleteClient(cid);
+  render();
+}
 
-renderClients();
+async function moveClient(cid,dir){
+  const idx=clients.findIndex(c=>c.id===cid);
+  const newIdx=idx+dir;
+  if(newIdx<0||newIdx>=clients.length)return;
+  const[moved]=clients.splice(idx,1);clients.splice(newIdx,0,moved);
+  await patchOrder();render();
+}
+
+document.getElementById('new-client').addEventListener('keydown',e=>{if(e.key==='Enter')openAddModal();});
+
+const now=new Date();
+document.getElementById('month-label').textContent=now.toLocaleDateString('en-US',{month:'long',year:'numeric'});
+
+fetchAll();
 </script>
 </body>
 </html>
