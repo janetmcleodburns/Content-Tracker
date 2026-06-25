@@ -13,12 +13,10 @@
     --gray-bg: #E8EDF2; --gray-mid: #C8D3DC; --white: #ffffff;
     --text: #1B2D6B; --text-mid: #3B6FA0; --text-muted: #6B8BAA;
     --border: rgba(27,45,107,0.15); --border-md: rgba(27,45,107,0.25);
-    --radius-md: 8px; --radius-lg: 12px; --success: #2e7d32;
-    --gold: #E5A820;
+    --radius-md: 8px; --radius-lg: 12px; --success: #2e7d32; --gold: #E5A820;
   }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--gray-bg); color: var(--text); min-height: 100vh; }
 
-  /* HEADER */
   .site-header { background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, var(--teal) 100%); padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
   .site-header h1 { color: var(--white); font-size: 20px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
   .site-header h1 i { font-size: 22px; color: var(--teal-light); }
@@ -34,23 +32,18 @@
 
   .main { padding: 1.5rem 1.25rem; max-width: 980px; margin: 0 auto; }
 
-  /* SUMMARY */
   .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 10px; margin-bottom: 1.25rem; }
   .stat { background: var(--white); border-radius: var(--radius-lg); padding: 14px 16px; border-left: 4px solid var(--teal); box-shadow: 0 1px 3px rgba(27,45,107,0.08); }
-  .stat:nth-child(2) { border-left-color: var(--navy); }
-  .stat:nth-child(3) { border-left-color: var(--blue); }
-  .stat:nth-child(4) { border-left-color: var(--teal-light); }
+  .stat:nth-child(2){border-left-color:var(--navy);} .stat:nth-child(3){border-left-color:var(--blue);} .stat:nth-child(4){border-left-color:var(--teal-light);}
   .stat-val { font-size: 26px; font-weight: 600; color: var(--navy); }
   .stat-lbl { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
 
-  /* ADD CLIENT */
   .add-bar { background: var(--white); border-radius: var(--radius-lg); padding: 1rem 1.25rem; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(27,45,107,0.08); border: 0.5px solid var(--border); }
   .add-bar input { font-size: 14px; padding: 8px 12px; border-radius: var(--radius-md); border: 1.5px solid var(--gray-mid); color: var(--text); flex: 1; min-width: 180px; max-width: 300px; outline: none; transition: border-color 0.15s; }
   .add-bar input:focus { border-color: var(--teal); }
   .btn-add { font-size: 13px; padding: 8px 18px; border-radius: var(--radius-md); border: none; background: var(--navy); color: var(--white); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-weight: 500; transition: background 0.15s; }
   .btn-add:hover { background: var(--navy-light); }
 
-  /* CLIENT CARDS */
   .clients-list { display: flex; flex-direction: column; gap: 12px; }
   .client-card { background: var(--white); border-radius: var(--radius-lg); border: 0.5px solid var(--border); box-shadow: 0 1px 3px rgba(27,45,107,0.07); overflow: hidden; }
   .client-card.dragging { opacity: 0.5; }
@@ -78,10 +71,11 @@
   .svc-editor.open { display: block; }
   .svc-editor-title { font-size: 12px; font-weight: 600; color: var(--navy); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
   .svc-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .svc-section-label { width: 100%; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 6px; margin-bottom: 2px; }
   .svc-chip { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; padding: 5px 12px; border-radius: 20px; border: 1.5px solid var(--blue); background: var(--white); color: var(--blue); cursor: pointer; transition: all 0.12s; user-select: none; }
   .svc-chip.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
   .svc-chip i { font-size: 13px; }
-  .blog-count-row { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-mid); }
+  .blog-count-row { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-mid); margin-top: 6px; }
   .blog-count-row input[type=number] { width: 60px; padding: 5px 8px; border: 1.5px solid var(--gray-mid); border-radius: 6px; font-size: 14px; text-align: center; outline: none; }
   .blog-count-row input:focus { border-color: var(--teal); }
   .svc-save-btn { margin-top: 10px; font-size: 13px; padding: 7px 20px; border-radius: var(--radius-md); border: none; background: var(--navy); color: var(--white); cursor: pointer; font-weight: 500; transition: background 0.15s; }
@@ -99,6 +93,7 @@
   thead.col-heads th { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; padding: 6px 10px; background: #f0f5f9; border-bottom: 1px solid var(--border-md); text-align: center; white-space: nowrap; }
   thead.col-heads th.col-label { text-align: left; padding-left: 20px; }
   input[type="checkbox"] { width: 17px; height: 17px; cursor: pointer; accent-color: var(--navy); }
+  .monthly-row td { background: #fafcff; }
   .monthly-check { display: flex; align-items: center; gap: 8px; }
   .monthly-status { font-size: 12px; color: var(--text-muted); }
   .done-status { color: var(--success); font-weight: 500; }
@@ -107,13 +102,15 @@
   /* MODAL */
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center; }
   .modal-overlay.open { display: flex; }
-  .modal { background: var(--white); border-radius: var(--radius-lg); padding: 1.5rem; width: 90%; max-width: 480px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
-  .modal h3 { font-size: 17px; color: var(--navy); margin-bottom: 1rem; }
-  .modal-svc-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1rem; }
-  .modal-blog-row { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-mid); margin-bottom: 1rem; }
+  .modal { background: var(--white); border-radius: var(--radius-lg); padding: 1.5rem; width: 90%; max-width: 500px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto; }
+  .modal h3 { font-size: 17px; color: var(--navy); margin-bottom: 4px; }
+  .modal-client-name { font-size: 13px; color: var(--text-muted); margin-bottom: 1rem; }
+  .modal-section-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 12px 0 6px; }
+  .modal-svc-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+  .modal-blog-row { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-mid); margin: 10px 0; }
   .modal-blog-row input { width: 60px; padding: 5px 8px; border: 1.5px solid var(--gray-mid); border-radius: 6px; font-size: 14px; text-align: center; outline: none; }
   .modal-blog-row input:focus { border-color: var(--teal); }
-  .modal-btns { display: flex; gap: 8px; justify-content: flex-end; }
+  .modal-btns { display: flex; gap: 8px; justify-content: flex-end; margin-top: 1rem; }
   .modal-btn-primary { font-size: 14px; padding: 8px 22px; border-radius: var(--radius-md); border: none; background: var(--navy); color: var(--white); cursor: pointer; font-weight: 500; }
   .modal-btn-primary:hover { background: var(--navy-light); }
   .modal-btn-cancel { font-size: 14px; padding: 8px 16px; border-radius: var(--radius-md); border: 1px solid var(--gray-mid); background: none; color: var(--text-mid); cursor: pointer; }
@@ -125,7 +122,7 @@
   @media (max-width: 600px) {
     .site-header { padding: 1rem; }
     .main { padding: 1rem 0.75rem; }
-    table { min-width: 400px; }
+    table { min-width: 500px; }
     .card-body { overflow-x: auto; }
   }
 </style>
@@ -133,7 +130,7 @@
 <body>
 
 <header class="site-header">
-  <h1><i class="ti ti-calendar-check" aria-hidden="true"></i>Content Publishing Tracker</h1>
+  <h1><i class="ti ti-calendar-check"></i>Content Publishing Tracker</h1>
   <div class="header-right">
     <div class="sync-badge"><div class="sync-dot" id="sync-dot"></div><span id="sync-label">Synced ✓</span></div>
     <span class="month-badge" id="month-label"></span>
@@ -144,27 +141,32 @@
 <main class="main">
   <div class="summary" id="summary"></div>
   <div class="add-bar">
-    <input type="text" id="new-client" placeholder="Client name..." aria-label="New client name" />
+    <input type="text" id="new-client" placeholder="Client name..." />
     <button class="btn-add" onclick="openAddModal()"><i class="ti ti-plus"></i> Add client</button>
   </div>
   <div class="clients-list" id="clients-list"></div>
   <div class="site-footer">McLeod Real Estate Consulting · Content resets each month automatically</div>
 </main>
 
-<!-- ADD CLIENT MODAL -->
+<!-- MODAL -->
 <div class="modal-overlay" id="add-modal">
   <div class="modal">
-    <h3>Configure client services</h3>
-    <div id="modal-client-name" style="font-size:15px;font-weight:600;color:var(--navy);margin-bottom:12px;"></div>
-    <div style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">Select deliverables</div>
-    <div class="modal-svc-grid" id="modal-svc-grid"></div>
-    <div class="modal-blog-row" id="modal-blog-row" style="display:none">
-      <label for="modal-blog-count">Number of blogs per month:</label>
-      <input type="number" id="modal-blog-count" min="0" max="12" value="4" />
+    <h3 id="modal-title">Configure client services</h3>
+    <div class="modal-client-name" id="modal-client-name"></div>
+
+    <div class="modal-section-label">Blog columns — check each platform to post to per blog</div>
+    <div class="modal-svc-grid" id="modal-blog-cols"></div>
+    <div class="modal-blog-row">
+      <label for="modal-blog-count">Blogs per month:</label>
+      <input type="number" id="modal-blog-count" min="0" max="12" value="5" />
     </div>
+
+    <div class="modal-section-label">Monthly deliverables</div>
+    <div class="modal-svc-grid" id="modal-monthly-svcs"></div>
+
     <div class="modal-btns">
-      <button class="modal-btn-cancel" onclick="closeAddModal()">Cancel</button>
-      <button class="modal-btn-primary" onclick="confirmAddClient()">Add client</button>
+      <button class="modal-btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="modal-btn-primary" id="modal-confirm-btn" onclick="confirmModal()">Add client</button>
     </div>
   </div>
 </div>
@@ -174,148 +176,102 @@ const SUPA_URL='https://egqyhhqtcpssdwolbtvd.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVncXloaHF0Y3Bzc2R3b2xidHZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwMjE4NjAsImV4cCI6MjA5NjU5Nzg2MH0.AYzOBpIj4RdbLxrKf_IEQOEurbxDVWtKra_jVZrHKPg';
 const hdrs={'apikey':SUPA_KEY,'Authorization':`Bearer ${SUPA_KEY}`,'Content-Type':'application/json','Prefer':'return=representation'};
 
-const ALL_SERVICES = [
-  {id:'newsletter',  label:'Newsletter',        icon:'ti-mail'},
-  {id:'market',      label:'Market Report',     icon:'ti-chart-bar'},
-  {id:'blog',        label:'Blog',              icon:'ti-pencil'},
-  {id:'facebook',    label:'Facebook',          icon:'ti-brand-facebook'},
-  {id:'instagram',   label:'Instagram',         icon:'ti-brand-instagram'},
-  {id:'tiktok',      label:'TikTok',            icon:'ti-brand-tiktok'},
-  {id:'email_blast', label:'Email Blasts',      icon:'ti-send'},
-  {id:'holiday',     label:'Holiday Flyers',    icon:'ti-confetti'},
-  {id:'website',     label:'Website Updates',   icon:'ti-world'},
-  {id:'gmb',         label:'Google My Business',icon:'ti-map-pin'},
+// BLOG COLUMNS — shown as columns across the top per blog row
+const BLOG_COL_OPTIONS = [
+  {id:'website',  label:'Website'},
+  {id:'gmb',      label:'Google My Business'},
+  {id:'facebook', label:'Facebook'},
+  {id:'instagram',label:'Instagram'},
+  {id:'tiktok',   label:'TikTok'},
 ];
 
-// Social/per-blog columns
-const BLOG_SOCIAL_COLS = ['facebook','instagram','tiktok','website','gmb'];
+// MONTHLY DELIVERABLES — single checkbox rows
+const MONTHLY_OPTIONS = [
+  {id:'newsletter',  label:'Newsletter',        icon:'ti-mail'},
+  {id:'market',      label:'Market Report',     icon:'ti-chart-bar'},
+  {id:'email_blast', label:'Email Blasts',      icon:'ti-send'},
+  {id:'holiday',     label:'Holiday Flyers',    icon:'ti-confetti'},
+];
 
-let clients = [];
-let checks = {};
-let monthKey = '';
-let pendingNewClient = null;
-let modalSelectedSvcs = new Set();
+let clients=[], checks={}, monthKey='';
+let modalMode='add', modalClientId=null, pendingNewClientName=null;
 
-function getMonthKey(){
-  const d=new Date();
-  return d.getFullYear()+'-'+d.getMonth();
-}
-
-function setSyncStatus(state,msg){
-  const dot=document.getElementById('sync-dot');
-  dot.className='sync-dot'+(state==='syncing'?' syncing':state==='error'?' error':'');
-  document.getElementById('sync-label').textContent=msg||'Synced ✓';
-}
+function getMonthKey(){const d=new Date();return d.getFullYear()+'-'+d.getMonth();}
+function setSyncStatus(s,m){const d=document.getElementById('sync-dot');d.className='sync-dot'+(s==='syncing'?' syncing':s==='error'?' error':'');document.getElementById('sync-label').textContent=m||'Synced ✓';}
 
 async function fetchAll(){
   setSyncStatus('syncing','Loading...');
   monthKey=getMonthKey();
   try{
-    const [cl,ch]=await Promise.all([
+    const[cl,ch]=await Promise.all([
       fetch(`${SUPA_URL}/rest/v1/cpt_clients?select=*&order=sort_order.asc`,{headers:hdrs}).then(r=>r.json()),
       fetch(`${SUPA_URL}/rest/v1/cpt_checks?select=*&month_key=eq.${monthKey}`,{headers:hdrs}).then(r=>r.json()),
     ]);
     clients=Array.isArray(cl)?cl:[];
     checks={};
-    if(Array.isArray(ch)) ch.forEach(c=>{checks[c.check_key]=true;});
-    setSyncStatus('ok','Synced ✓');
-    render();
+    if(Array.isArray(ch))ch.forEach(c=>{checks[c.check_key]=true;});
+    setSyncStatus('ok','Synced ✓');render();
   }catch(e){setSyncStatus('error','Sync error');console.error(e);}
 }
 
-async function saveClient(client){
-  setSyncStatus('syncing','Saving...');
-  try{
-    await fetch(`${SUPA_URL}/rest/v1/cpt_clients`,{method:'POST',headers:hdrs,body:JSON.stringify(client)});
-    setSyncStatus('ok','Synced ✓');
-  }catch(e){setSyncStatus('error','Sync error');}
+async function saveNewClient(client){
+  await fetch(`${SUPA_URL}/rest/v1/cpt_clients`,{method:'POST',headers:hdrs,body:JSON.stringify(client)});
 }
-
-async function updateClient(client){
-  setSyncStatus('syncing','Saving...');
-  try{
-    await fetch(`${SUPA_URL}/rest/v1/cpt_clients?id=eq.${client.id}`,{method:'PATCH',headers:hdrs,body:JSON.stringify({deliverables:client.deliverables,blog_count:client.blog_count})});
-    setSyncStatus('ok','Synced ✓');
-  }catch(e){setSyncStatus('error','Sync error');}
+async function updateClientSvcs(client){
+  await fetch(`${SUPA_URL}/rest/v1/cpt_clients?id=eq.${client.id}`,{method:'PATCH',headers:hdrs,body:JSON.stringify({deliverables:client.deliverables,blog_count:client.blog_count})});
 }
-
 async function patchOrder(){
-  try{
-    await Promise.all(clients.map((c,i)=>fetch(`${SUPA_URL}/rest/v1/cpt_clients?id=eq.${c.id}`,{method:'PATCH',headers:hdrs,body:JSON.stringify({sort_order:i})})));
-  }catch(e){}
+  await Promise.all(clients.map((c,i)=>fetch(`${SUPA_URL}/rest/v1/cpt_clients?id=eq.${c.id}`,{method:'PATCH',headers:hdrs,body:JSON.stringify({sort_order:i})})));
 }
-
-async function deleteClient(cid){
-  try{
-    await fetch(`${SUPA_URL}/rest/v1/cpt_clients?id=eq.${cid}`,{method:'DELETE',headers:hdrs});
-    await fetch(`${SUPA_URL}/rest/v1/cpt_checks?client_id=eq.${cid}`,{method:'DELETE',headers:hdrs});
-  }catch(e){}
+async function deleteClientDB(cid){
+  await fetch(`${SUPA_URL}/rest/v1/cpt_clients?id=eq.${cid}`,{method:'DELETE',headers:hdrs});
+  await fetch(`${SUPA_URL}/rest/v1/cpt_checks?client_id=eq.${cid}`,{method:'DELETE',headers:hdrs});
 }
-
-async function toggleCheck(checkKey, clientId, val){
-  checks[checkKey]=val;
+async function toggleCheck(key,cid,val){
+  checks[key]=val;
   renderSummary();
-  try{
-    if(val){
-      await fetch(`${SUPA_URL}/rest/v1/cpt_checks`,{method:'POST',headers:{...hdrs,'Prefer':'return=minimal,resolution=merge-duplicates'},body:JSON.stringify({id:clientId+'_'+monthKey+'_'+checkKey,client_id:clientId,month_key:monthKey,check_key:checkKey,checked:true})});
-    }else{
-      await fetch(`${SUPA_URL}/rest/v1/cpt_checks?check_key=eq.${checkKey}&month_key=eq.${monthKey}&client_id=eq.${clientId}`,{method:'DELETE',headers:hdrs});
-    }
-  }catch(e){}
+  if(val){
+    await fetch(`${SUPA_URL}/rest/v1/cpt_checks`,{method:'POST',headers:{...hdrs,'Prefer':'return=minimal,resolution=merge-duplicates'},body:JSON.stringify({id:cid+'_'+monthKey+'_'+key,client_id:cid,month_key:monthKey,check_key:key,checked:true})});
+  }else{
+    await fetch(`${SUPA_URL}/rest/v1/cpt_checks?check_key=eq.${encodeURIComponent(key)}&month_key=eq.${monthKey}&client_id=eq.${cid}`,{method:'DELETE',headers:hdrs});
+  }
 }
-
 async function resetMonth(){
   if(!confirm('Reset all checkboxes for this month?'))return;
-  setSyncStatus('syncing','Resetting...');
-  try{
-    await fetch(`${SUPA_URL}/rest/v1/cpt_checks?month_key=eq.${monthKey}`,{method:'DELETE',headers:hdrs});
-    checks={};setSyncStatus('ok','Synced ✓');render();
-  }catch(e){setSyncStatus('error','Sync error');}
+  await fetch(`${SUPA_URL}/rest/v1/cpt_checks?month_key=eq.${monthKey}`,{method:'DELETE',headers:hdrs});
+  checks={};render();
 }
 
 function clientProgress(client){
-  const svcs=client.deliverables||[];
+  const svcs=client.deliverables||{};
+  const blogCols=(svcs.blog_cols||[]);
+  const monthlySvcs=(svcs.monthly||[]);
   let done=0,total=0;
-  // blogs
-  if(svcs.includes('blog')&&client.blog_count>0){
-    const blogCols=BLOG_SOCIAL_COLS.filter(s=>svcs.includes(s));
-    for(let b=1;b<=client.blog_count;b++){
-      if(blogCols.length>0){
-        blogCols.forEach(()=>{total++;});
-        blogCols.forEach(col=>{if(checks[`${client.id}_b${b}_${col}`])done++;});
-      } else {
-        total++;
-        if(checks[`${client.id}_b${b}_done`])done++;
-      }
+  const bc=client.blog_count||0;
+  if(bc>0){
+    if(blogCols.length>0){
+      for(let b=1;b<=bc;b++) blogCols.forEach(col=>{total++;if(checks[`${client.id}_b${b}_${col}`])done++;});
+    } else {
+      for(let b=1;b<=bc;b++){total++;if(checks[`${client.id}_b${b}_done`])done++;}
     }
   }
-  // monthly singles
-  ['newsletter','market','email_blast','holiday','website','gmb'].forEach(s=>{
-    if(svcs.includes(s)){total++;if(checks[`${client.id}_${s}`])done++;}
-  });
-  // standalone social (no blog)
-  if(!svcs.includes('blog')){
-    ['facebook','instagram','tiktok'].forEach(s=>{
-      if(svcs.includes(s)){total++;if(checks[`${client.id}_${s}`])done++;}
-    });
-  }
+  monthlySvcs.forEach(s=>{total++;if(checks[`${client.id}_${s}`])done++;});
   return{done,total};
 }
 
 function renderSummary(){
-  let totalDone=0,totalTasks=0;
-  clients.forEach(c=>{const p=clientProgress(c);totalDone+=p.done;totalTasks+=p.total;});
-  const pct=totalTasks?Math.round(totalDone/totalTasks*100):0;
+  let td=0,tt=0;
+  clients.forEach(c=>{const p=clientProgress(c);td+=p.done;tt+=p.total;});
+  const pct=tt?Math.round(td/tt*100):0;
   document.getElementById('summary').innerHTML=`
     <div class="stat"><div class="stat-val">${clients.length}</div><div class="stat-lbl">Active clients</div></div>
-    <div class="stat"><div class="stat-val">${totalDone}</div><div class="stat-lbl">Tasks complete</div></div>
-    <div class="stat"><div class="stat-val">${totalTasks-totalDone}</div><div class="stat-lbl">Tasks remaining</div></div>
-    <div class="stat"><div class="stat-val">${pct}%</div><div class="stat-lbl">Month complete</div></div>
-  `;
+    <div class="stat"><div class="stat-val">${td}</div><div class="stat-lbl">Tasks complete</div></div>
+    <div class="stat"><div class="stat-val">${tt-td}</div><div class="stat-lbl">Tasks remaining</div></div>
+    <div class="stat"><div class="stat-val">${pct}%</div><div class="stat-lbl">Month complete</div></div>`;
 }
 
-function initials(name){return name.trim().split(/\s+/).map(w=>w[0]||'').join('').slice(0,2).toUpperCase();}
-function esc(str){return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function initials(n){return n.trim().split(/\s+/).map(w=>w[0]||'').join('').slice(0,2).toUpperCase();}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
 function render(){
   renderSummary();
@@ -325,93 +281,61 @@ function render(){
     list.innerHTML='<div class="empty-state"><i class="ti ti-users"></i>No clients yet — add one above to get started</div>';
     return;
   }
-  clients.forEach((client,idx)=>{
-    const svcs=client.deliverables||[];
+  clients.forEach((client)=>{
+    const svcs=client.deliverables||{};
+    const blogCols=svcs.blog_cols||[];
+    const monthlySvcs=svcs.monthly||[];
+    const bc=client.blog_count||0;
     const prog=clientProgress(client);
     const pct=prog.total?Math.round(prog.done/prog.total*100):0;
+
     const card=document.createElement('div');
-    card.className='client-card';
-    card.draggable=true;
-    card.dataset.id=client.id;
+    card.className='client-card';card.draggable=true;card.dataset.id=client.id;
 
     // HEADER
-    const hdr=document.createElement('div');
-    hdr.className='card-header';
+    const hdr=document.createElement('div');hdr.className='card-header';
     hdr.innerHTML=`
-      <span class="drag-handle" title="Drag to reorder"><i class="ti ti-grip-vertical"></i></span>
+      <span class="drag-handle"><i class="ti ti-grip-vertical"></i></span>
       <div class="avatar">${initials(client.name)}</div>
       <span class="card-name">${esc(client.name)}</span>
       <div class="card-progress">
         <div class="prog-bar"><div class="prog-fill" style="width:${pct}%"></div></div>
         <span class="prog-pct">${pct}%</span>
       </div>
-      <button class="edit-svc-btn" onclick="toggleSvcEditor('${client.id}')"><i class="ti ti-settings" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>Services</button>
+      <button class="edit-svc-btn" onclick="openEditModal('${client.id}')"><i class="ti ti-settings" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>Services</button>
       <div class="move-btns">
         <button class="move-btn" onclick="moveClient('${client.id}',-1)"><i class="ti ti-chevron-up"></i></button>
         <button class="move-btn" onclick="moveClient('${client.id}',1)"><i class="ti ti-chevron-down"></i></button>
       </div>
-      <button class="del-btn" onclick="removeClient('${client.id}')"><i class="ti ti-trash"></i></button>
-    `;
+      <button class="del-btn" onclick="removeClient('${client.id}')"><i class="ti ti-trash"></i></button>`;
     card.appendChild(hdr);
 
-    // SERVICE EDITOR (inline)
-    const svcEd=document.createElement('div');
-    svcEd.className='svc-editor';
-    svcEd.id=`svc-ed-${client.id}`;
-    const hasBlog=svcs.includes('blog');
-    svcEd.innerHTML=`
-      <div class="svc-editor-title">Edit services for ${esc(client.name)}</div>
-      <div class="svc-grid">${ALL_SERVICES.map(s=>`
-        <div class="svc-chip${svcs.includes(s.id)?' active':''}" data-svc="${s.id}" data-cid="${client.id}" onclick="toggleSvcChip(this,'${client.id}')">
-          <i class="ti ${s.icon}"></i>${s.label}
-        </div>`).join('')}
-      </div>
-      <div class="blog-count-row" id="bcr-${client.id}" style="display:${hasBlog?'flex':'none'}">
-        <label>Blogs per month:</label>
-        <input type="number" id="bc-${client.id}" min="0" max="12" value="${client.blog_count||4}" />
-      </div>
-      <button class="svc-save-btn" onclick="saveSvcEditor('${client.id}')">Save services</button>
-    `;
-    card.appendChild(svcEd);
-
     // TABLE
-    const body=document.createElement('div');
-    body.className='card-body';
-    if(!svcs.length){
+    const body=document.createElement('div');body.className='card-body';
+
+    const hasBlog=bc>0;
+    const hasCols=blogCols.length>0;
+    const allCols=['Content',...(hasBlog&&hasCols?blogCols.map(c=>BLOG_COL_OPTIONS.find(x=>x.id===c)?.label||c):[])];
+
+    if(!hasBlog&&!monthlySvcs.length){
       body.innerHTML='<div class="no-services"><i class="ti ti-settings" style="margin-right:5px"></i>No services configured — click Services to set up</div>';
     } else {
-      const blogCols=BLOG_SOCIAL_COLS.filter(s=>svcs.includes(s));
-      const hasBlogSection=svcs.includes('blog')&&client.blog_count>0;
-      const standaloneSocial=['facebook','instagram','tiktok'].filter(s=>svcs.includes(s)&&!svcs.includes('blog'));
-      const monthlySingles=['newsletter','market','email_blast','holiday','website','gmb'].filter(s=>svcs.includes(s));
-
-      let colHeads=['Content'];
-      let showBlogCols=false;
-      if(hasBlogSection&&blogCols.length>0){
-        showBlogCols=true;
-        colHeads=[...colHeads,...blogCols.map(c=>ALL_SERVICES.find(s=>s.id===c).label)];
-      }
-
       const table=document.createElement('table');
-      if(showBlogCols){
-        table.innerHTML=`<thead class="col-heads"><tr>${colHeads.map((h,i)=>`<th${i===0?' class="col-label"':''}>${h}</th>`).join('')}</tr></thead><tbody id="tbody-${client.id}"></tbody>`;
-      } else {
-        table.innerHTML=`<tbody id="tbody-${client.id}"></tbody>`;
-      }
-      body.appendChild(table);
-      const tbody=table.querySelector('tbody');
+      // Header
+      const thead=document.createElement('thead');thead.className='col-heads';
+      thead.innerHTML=`<tr>${allCols.map((h,i)=>`<th${i===0?' class="col-label"':''}>${h}</th>`).join('')}</tr>`;
+      table.appendChild(thead);
+      const tbody=document.createElement('tbody');table.appendChild(tbody);
 
-      // Blog rows
-      if(hasBlogSection){
-        const blogSec=document.createElement('tr');
-        blogSec.className='section-label';
-        blogSec.innerHTML=`<td colspan="${colHeads.length}">Blogs — ${client.blog_count} per month</td>`;
-        tbody.appendChild(blogSec);
+      // BLOG SECTION
+      if(hasBlog){
+        const sec=document.createElement('tr');sec.className='section-label';
+        sec.innerHTML=`<td colspan="${allCols.length}">Blogs — ${bc} per month</td>`;
+        tbody.appendChild(sec);
 
-        for(let b=1;b<=client.blog_count;b++){
-          const row=document.createElement('tr');
-          row.className='data-row';
-          if(blogCols.length>0){
+        for(let b=1;b<=bc;b++){
+          const row=document.createElement('tr');row.className='data-row';
+          if(hasCols){
             let cells=`<td class="col-label">Blog ${b}</td>`;
             blogCols.forEach(col=>{
               const key=`${client.id}_b${b}_${col}`;
@@ -420,39 +344,31 @@ function render(){
             row.innerHTML=cells;
           } else {
             const key=`${client.id}_b${b}_done`;
-            row.innerHTML=`<td class="col-label">Blog ${b}</td><td style="text-align:left;padding-left:14px"><div class="monthly-check"><input type="checkbox" ${checks[key]?'checked':''} onchange="toggleCheck('${key}','${client.id}',this.checked)" /><span class="monthly-status ${checks[key]?'done-status':''}">${checks[key]?'Done':'Pending'}</span></div></td>`;
+            const done=checks[key];
+            row.innerHTML=`<td class="col-label">Blog ${b}</td><td style="text-align:left;padding-left:14px"><div class="monthly-check"><input type="checkbox" ${done?'checked':''} onchange="toggleCheck('${key}','${client.id}',this.checked)" /><span class="monthly-status ${done?'done-status':''}">${done?'Done':'Pending'}</span></div></td>`;
           }
           tbody.appendChild(row);
         }
       }
 
-      // Standalone social
-      if(standaloneSocial.length>0){
+      // MONTHLY SECTION
+      if(monthlySvcs.length){
         const sec=document.createElement('tr');sec.className='section-label';
-        sec.innerHTML=`<td colspan="2">Social Media</td>`;tbody.appendChild(sec);
-        standaloneSocial.forEach(s=>{
-          const svc=ALL_SERVICES.find(x=>x.id===s);
+        sec.innerHTML=`<td colspan="${allCols.length}">Monthly Deliverables</td>`;
+        tbody.appendChild(sec);
+
+        monthlySvcs.forEach(s=>{
+          const svc=MONTHLY_OPTIONS.find(x=>x.id===s);
+          if(!svc)return;
           const key=`${client.id}_${s}`;
           const done=checks[key];
           const row=document.createElement('tr');row.className='data-row monthly-row';
-          row.innerHTML=`<td class="col-label">${svc.label}</td><td style="text-align:left;padding-left:14px"><div class="monthly-check"><input type="checkbox" ${done?'checked':''} onchange="toggleCheck('${key}','${client.id}',this.checked)" /><span class="monthly-status ${done?'done-status':''}">${done?'Done':'Pending'}</span></div></td>`;
+          row.innerHTML=`<td class="col-label">${svc.label}</td><td colspan="${allCols.length-1}" style="text-align:left;padding-left:14px"><div class="monthly-check"><input type="checkbox" ${done?'checked':''} onchange="toggleCheck('${key}','${client.id}',this.checked)" /><span class="monthly-status ${done?'done-status':''}">${done?'Sent':'Pending'}</span></div></td>`;
           tbody.appendChild(row);
         });
       }
 
-      // Monthly singles
-      if(monthlySingles.length>0){
-        const sec=document.createElement('tr');sec.className='section-label';
-        sec.innerHTML=`<td colspan="2">Monthly Deliverables</td>`;tbody.appendChild(sec);
-        monthlySingles.forEach(s=>{
-          const svc=ALL_SERVICES.find(x=>x.id===s);
-          const key=`${client.id}_${s}`;
-          const done=checks[key];
-          const row=document.createElement('tr');row.className='data-row monthly-row';
-          row.innerHTML=`<td class="col-label">${svc.label}</td><td style="text-align:left;padding-left:14px"><div class="monthly-check"><input type="checkbox" ${done?'checked':''} onchange="toggleCheck('${key}','${client.id}',this.checked)" /><span class="monthly-status ${done?'done-status':''}">${done?'Done':'Pending'}</span></div></td>`;
-          tbody.appendChild(row);
-        });
-      }
+      body.appendChild(table);
     }
     card.appendChild(body);
 
@@ -465,8 +381,7 @@ function render(){
       e.preventDefault();card.classList.remove('drag-over');
       const fromId=e.dataTransfer.getData('text/plain');
       if(fromId===client.id)return;
-      const fi=clients.findIndex(c=>c.id===fromId);
-      const ti=clients.findIndex(c=>c.id===client.id);
+      const fi=clients.findIndex(c=>c.id===fromId),ti=clients.findIndex(c=>c.id===client.id);
       const[moved]=clients.splice(fi,1);clients.splice(ti,0,moved);
       patchOrder();render();
     });
@@ -475,93 +390,87 @@ function render(){
   });
 }
 
-function toggleSvcEditor(cid){
-  const ed=document.getElementById(`svc-ed-${cid}`);
-  if(ed)ed.classList.toggle('open');
+// MODAL
+function buildModalChips(){
+  const client=modalMode==='edit'?clients.find(c=>c.id===modalClientId):null;
+  const svcs=client?.deliverables||{};
+  const activeBlogCols=new Set(svcs.blog_cols||[]);
+  const activeMonthly=new Set(svcs.monthly||[]);
+
+  document.getElementById('modal-blog-cols').innerHTML=BLOG_COL_OPTIONS.map(s=>`
+    <div class="svc-chip${activeBlogCols.has(s.id)?' active':''}" data-modal-type="blog_col" data-svc="${s.id}" onclick="toggleModalChip(this)">
+      ${s.label}
+    </div>`).join('');
+
+  document.getElementById('modal-monthly-svcs').innerHTML=MONTHLY_OPTIONS.map(s=>`
+    <div class="svc-chip${activeMonthly.has(s.id)?' active':''}" data-modal-type="monthly" data-svc="${s.id}" onclick="toggleModalChip(this)">
+      <i class="ti ${s.icon}"></i>${s.label}
+    </div>`).join('');
+
+  document.getElementById('modal-blog-count').value=client?.blog_count||5;
 }
 
-function toggleSvcChip(chip,cid){
-  chip.classList.toggle('active');
-  const hasBlog=[...document.querySelectorAll(`[data-cid="${cid}"].active`)].some(c=>c.dataset.svc==='blog');
-  const bcr=document.getElementById(`bcr-${cid}`);
-  if(bcr)bcr.style.display=hasBlog?'flex':'none';
-}
-
-async function saveSvcEditor(cid){
-  const chips=[...document.querySelectorAll(`[data-cid="${cid}"].active`)];
-  const deliverables=chips.map(c=>c.dataset.svc);
-  const blogCount=parseInt(document.getElementById(`bc-${cid}`)?.value)||0;
-  const client=clients.find(c=>c.id===cid);
-  if(!client)return;
-  client.deliverables=deliverables;
-  client.blog_count=deliverables.includes('blog')?blogCount:0;
-  await updateClient(client);
-  document.getElementById(`svc-ed-${cid}`)?.classList.remove('open');
-  render();
-}
-
-// ADD MODAL
 function openAddModal(){
   const name=document.getElementById('new-client').value.trim();
   if(!name)return;
-  pendingNewClient=name;
-  modalSelectedSvcs=new Set();
+  pendingNewClientName=name;
+  modalMode='add';modalClientId=null;
+  document.getElementById('modal-title').textContent='Configure client services';
   document.getElementById('modal-client-name').textContent=`Client: ${name}`;
-  const grid=document.getElementById('modal-svc-grid');
-  grid.innerHTML=ALL_SERVICES.map(s=>`
-    <div class="svc-chip" data-modal-svc="${s.id}" onclick="toggleModalSvc(this,'${s.id}')">
-      <i class="ti ${s.icon}"></i>${s.label}
-    </div>`).join('');
-  document.getElementById('modal-blog-row').style.display='none';
-  document.getElementById('modal-blog-count').value=4;
+  document.getElementById('modal-confirm-btn').textContent='Add client';
+  buildModalChips();
   document.getElementById('add-modal').classList.add('open');
 }
 
-function toggleModalSvc(chip,svcId){
-  chip.classList.toggle('active');
-  if(chip.classList.contains('active'))modalSelectedSvcs.add(svcId);
-  else modalSelectedSvcs.delete(svcId);
-  document.getElementById('modal-blog-row').style.display=modalSelectedSvcs.has('blog')?'flex':'none';
+function openEditModal(cid){
+  const client=clients.find(c=>c.id===cid);
+  if(!client)return;
+  modalMode='edit';modalClientId=cid;
+  document.getElementById('modal-title').textContent='Edit services';
+  document.getElementById('modal-client-name').textContent=`Client: ${client.name}`;
+  document.getElementById('modal-confirm-btn').textContent='Save services';
+  buildModalChips();
+  document.getElementById('add-modal').classList.add('open');
 }
 
-function closeAddModal(){
-  document.getElementById('add-modal').classList.remove('open');
-  pendingNewClient=null;
-}
+function closeModal(){document.getElementById('add-modal').classList.remove('open');pendingNewClientName=null;}
+function toggleModalChip(chip){chip.classList.toggle('active');}
 
-async function confirmAddClient(){
-  if(!pendingNewClient)return;
-  const deliverables=[...modalSelectedSvcs];
-  const blogCount=deliverables.includes('blog')?parseInt(document.getElementById('modal-blog-count').value)||4:0;
-  const client={id:'c_'+Date.now(),name:pendingNewClient,sort_order:clients.length,deliverables,blog_count:blogCount,added:new Date().toISOString().split('T')[0]};
-  clients.push(client);
-  await saveClient(client);
-  document.getElementById('new-client').value='';
-  closeAddModal();
-  render();
+async function confirmModal(){
+  const blogCols=[...document.querySelectorAll('[data-modal-type="blog_col"].active')].map(c=>c.dataset.svc);
+  const monthly=[...document.querySelectorAll('[data-modal-type="monthly"].active')].map(c=>c.dataset.svc);
+  const blogCount=parseInt(document.getElementById('modal-blog-count').value)||0;
+  const deliverables={blog_cols:blogCols,monthly};
+
+  if(modalMode==='add'){
+    const client={id:'c_'+Date.now(),name:pendingNewClientName,sort_order:clients.length,deliverables,blog_count:blogCount,added:new Date().toISOString().split('T')[0]};
+    clients.push(client);
+    await saveNewClient(client);
+    document.getElementById('new-client').value='';
+  } else {
+    const client=clients.find(c=>c.id===modalClientId);
+    if(client){client.deliverables=deliverables;client.blog_count=blogCount;await updateClientSvcs(client);}
+  }
+  closeModal();render();
 }
 
 async function removeClient(cid){
   if(!confirm('Remove this client?'))return;
   clients=clients.filter(c=>c.id!==cid);
-  Object.keys(checks).forEach(k=>{if(k.startsWith(cid))delete checks[k];});
-  await deleteClient(cid);
-  render();
+  await deleteClientDB(cid);render();
 }
 
 async function moveClient(cid,dir){
   const idx=clients.findIndex(c=>c.id===cid);
-  const newIdx=idx+dir;
-  if(newIdx<0||newIdx>=clients.length)return;
-  const[moved]=clients.splice(idx,1);clients.splice(newIdx,0,moved);
+  const ni=idx+dir;
+  if(ni<0||ni>=clients.length)return;
+  const[m]=clients.splice(idx,1);clients.splice(ni,0,m);
   await patchOrder();render();
 }
 
 document.getElementById('new-client').addEventListener('keydown',e=>{if(e.key==='Enter')openAddModal();});
-
 const now=new Date();
 document.getElementById('month-label').textContent=now.toLocaleDateString('en-US',{month:'long',year:'numeric'});
-
 fetchAll();
 </script>
 </body>
