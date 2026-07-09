@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <title>Content Publishing Tracker | McLeod Real Estate Consulting</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
 <style>
@@ -16,7 +17,6 @@
     --radius-md: 8px; --radius-lg: 12px; --success: #2e7d32; --gold: #E5A820;
   }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--gray-bg); color: var(--text); min-height: 100vh; }
-
   .site-header { background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, var(--teal) 100%); padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
   .site-header h1 { color: var(--white); font-size: 20px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
   .site-header h1 i { font-size: 22px; color: var(--teal-light); }
@@ -29,31 +29,26 @@
   @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
   .btn-reset { font-size: 12px; color: rgba(255,255,255,0.7); background: none; border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; cursor: pointer; padding: 5px 12px; transition: all 0.15s; }
   .btn-reset:hover { background: rgba(255,255,255,0.15); color: var(--white); }
-
   .main { padding: 1.5rem 1.25rem; max-width: 980px; margin: 0 auto; }
-
   .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 10px; margin-bottom: 1.25rem; }
   .stat { background: var(--white); border-radius: var(--radius-lg); padding: 14px 16px; border-left: 4px solid var(--teal); box-shadow: 0 1px 3px rgba(27,45,107,0.08); }
   .stat:nth-child(2){border-left-color:var(--navy);} .stat:nth-child(3){border-left-color:var(--blue);} .stat:nth-child(4){border-left-color:var(--teal-light);}
   .stat-val { font-size: 26px; font-weight: 600; color: var(--navy); }
   .stat-lbl { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-
   .add-bar { background: var(--white); border-radius: var(--radius-lg); padding: 1rem 1.25rem; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(27,45,107,0.08); border: 0.5px solid var(--border); }
   .add-bar input { font-size: 14px; padding: 8px 12px; border-radius: var(--radius-md); border: 1.5px solid var(--gray-mid); color: var(--text); flex: 1; min-width: 180px; max-width: 300px; outline: none; transition: border-color 0.15s; }
   .add-bar input:focus { border-color: var(--teal); }
   .btn-add { font-size: 13px; padding: 8px 18px; border-radius: var(--radius-md); border: none; background: var(--navy); color: var(--white); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-weight: 500; transition: background 0.15s; }
   .btn-add:hover { background: var(--navy-light); }
-
   .clients-list { display: flex; flex-direction: column; gap: 12px; }
   .client-card { background: var(--white); border-radius: var(--radius-lg); border: 0.5px solid var(--border); box-shadow: 0 1px 3px rgba(27,45,107,0.07); overflow: hidden; }
   .client-card.dragging { opacity: 0.5; }
   .client-card.drag-over { border: 2px dashed var(--teal); }
-
-  .card-header { background: linear-gradient(90deg, var(--navy) 0%, var(--blue) 100%); padding: 10px 14px; display: flex; align-items: center; gap: 10px; }
+  .card-header { background: linear-gradient(90deg, var(--navy) 0%, var(--blue) 100%); padding: 10px 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .drag-handle { color: rgba(255,255,255,0.5); cursor: grab; font-size: 16px; padding: 2px 4px; border-radius: 4px; transition: color 0.12s; flex-shrink: 0; }
   .drag-handle:hover { color: var(--white); }
   .avatar { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.4); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: var(--white); flex-shrink: 0; }
-  .card-name { font-weight: 600; font-size: 15px; color: var(--white); flex: 1; }
+  .card-name { font-weight: 600; font-size: 15px; color: var(--white); flex: 1; min-width: 100px; }
   .card-progress { display: flex; align-items: center; gap: 8px; }
   .prog-bar { width: 80px; height: 5px; background: rgba(255,255,255,0.2); border-radius: 3px; overflow: hidden; }
   .prog-fill { height: 100%; background: var(--teal-light); border-radius: 3px; transition: width 0.2s; }
@@ -65,11 +60,434 @@
   .edit-svc-btn:hover { background: rgba(255,255,255,0.25); color: var(--white); }
   .del-btn { background: rgba(255,255,255,0.1); border: none; border-radius: 4px; color: rgba(255,255,255,0.5); cursor: pointer; padding: 3px 7px; font-size: 14px; transition: all 0.12s; flex-shrink: 0; }
   .del-btn:hover { background: rgba(220,50,50,0.35); color: var(--white); }
+  .card-body { padding: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .section-label td { background: var(--teal-pale); color: var(--navy); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; padding: 5px 14px; border-top: 0.5px solid var(--border); }
+  tbody tr.data-row { border-bottom: 0.5px solid var(--border); }
+  tbody tr.data-row:last-child { border-bottom: none; }
+  tbody tr.data-row:hover { background: #f5f9fc; }
+  td { padding: 7px 10px; vertical-align: middle; text-align: center; }
+  td.col-label { text-align: left; padding-left: 20px; font-size: 12px; color: var(--text-mid); width: 140px; }
+  thead.col-heads th { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; padding: 6px 10px; background: #f0f5f9; border-bottom: 1px solid var(--border-md); text-align: center; white-space: nowrap; }
+  thead.col-heads th.col-label { text-align: left; padding-left: 20px; }
+  input[type="checkbox"] { width: 17px; height: 17px; cursor: pointer; accent-color: var(--navy); }
+  .monthly-row td { background: #fafcff; }
+  .monthly-check { display: flex; align-items: center; gap: 8px; }
+  .monthly-status { font-size: 12px; color: var(--text-muted); }
+  .done-status { color: var(--success); font-weight: 500; }
+  .no-services { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 13px; }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--white); border-radius: var(--radius-lg); padding: 1.5rem; width: 90%; max-width: 500px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto; }
+  .modal h3 { font-size: 17px; color: var(--navy); margin-bottom: 4px; }
+  .modal-client-name { font-size: 13px; color: var(--text-muted); margin-bottom: 1rem; }
+  .modal-section-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 12px 0 6px; }
+  .modal-svc-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+  .modal-blog-row { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-mid); margin: 10px 0; }
+  .modal-blog-row input { width: 60px; padding: 5px 8px; border: 1.5px solid var(--gray-mid); border-radius: 6px; font-size: 14px; text-align: center; outline: none; }
+  .modal-blog-row input:focus { border-color: var(--teal); }
+  .modal-btns { display: flex; gap: 8px; justify-content: flex-end; margin-top: 1rem; }
+  .modal-btn-primary { font-size: 14px; padding: 8px 22px; border-radius: var(--radius-md); border: none; background: var(--navy); color: var(--white); cursor: pointer; font-weight: 500; }
+  .modal-btn-primary:hover { background: var(--navy-light); }
+  .modal-btn-cancel { font-size: 14px; padding: 8px 16px; border-radius: var(--radius-md); border: 1px solid var(--gray-mid); background: none; color: var(--text-mid); cursor: pointer; }
+  .svc-chip { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; padding: 5px 12px; border-radius: 20px; border: 1.5px solid var(--blue); background: var(--white); color: var(--blue); cursor: pointer; transition: all 0.12s; user-select: none; }
+  .svc-chip.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+  .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-muted); font-size: 14px; }
+  .empty-state i { font-size: 40px; display: block; margin-bottom: 10px; color: var(--gray-mid); }
+  .site-footer { text-align: center; padding: 1.5rem; font-size: 12px; color: var(--text-muted); margin-top: 1rem; }
+  .notes-section { border-top: 1px solid var(--border); padding: 10px 14px; background: #fffef9; }
+  .notes-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .notes-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 5px; }
+  .notes-label i { font-size: 13px; color: var(--gold); }
+  .notes-text { font-size: 13px; color: var(--text-mid); line-height: 1.5; min-height: 20px; cursor: pointer; padding: 4px 6px; border-radius: 4px; transition: background 0.12s; }
+  .notes-text:hover { background: var(--teal-pale); }
+  .notes-text.empty { color: var(--text-muted); font-style: italic; }
+  .notes-edit-area { width: 100%; font-size: 13px; padding: 8px 10px; border: 1.5px solid var(--teal); border-radius: 6px; font-family: inherit; resize: vertical; min-height: 70px; outline: none; color: var(--text); background: var(--white); display: none; }
+  .notes-edit-area.open { display: block; }
+  .notes-actions { display: none; gap: 6px; margin-top: 6px; }
+  .notes-actions.open { display: flex; }
+  .notes-save-btn { font-size: 12px; padding: 5px 14px; border-radius: 6px; border: none; background: var(--navy); color: var(--white); cursor: pointer; font-weight: 500; }
+  .notes-cancel-btn { font-size: 12px; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--gray-mid); background: none; color: var(--text-muted); cursor: pointer; }
+  .card-name-edit { font-size: 15px; font-weight: 600; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); border-radius: 6px; color: var(--white); padding: 2px 8px; outline: none; min-width: 120px; max-width: 220px; display: none; }
+  .card-name-edit.open { display: block; }
+  .card-name.editing { display: none; }
+  .edit-name-btn { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 6px; color: rgba(255,255,255,0.7); cursor: pointer; padding: 3px 8px; font-size: 12px; transition: all 0.12s; }
+  .edit-name-btn:hover { background: rgba(255,255,255,0.25); color: var(--white); }
+  @media (max-width: 600px) {
+    .site-header { padding: 1rem; }
+    .main { padding: 1rem 0.75rem; }
+    table { min-width: 500px; }
+    .card-body { overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <h1><i class="ti ti-calendar-check"></i>Content Publishing Tracker</h1>
+  <div class="header-right">
+    <div class="sync-badge"><div class="sync-dot" id="sync-dot"></div><span id="sync-label">Synced ✓</span></div>
+    <span class="month-badge" id="month-label"></span>
+    <button class="btn-reset" onclick="resetMonth()"><i class="ti ti-refresh" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>Reset for next month</button>
+  </div>
+</header>
+<main class="main">
+  <div class="summary" id="summary"></div>
+  <div class="add-bar">
+    <input type="text" id="new-client" placeholder="Client name..." />
+    <button class="btn-add" onclick="openAddModal()"><i class="ti ti-plus"></i> Add client</button>
+  </div>
+  <div class="clients-list" id="clients-list"></div>
+  <div class="site-footer">McLeod Real Estate Consulting · Content resets each month automatically</div>
+</main>
 
-  /* SERVICE EDITOR */
+<div class="modal-overlay" id="add-modal">
+  <div class="modal">
+    <h3 id="modal-title">Configure client services</h3>
+    <div class="modal-client-name" id="modal-client-name"></div>
+    <div class="modal-section-label">Blog columns — check each platform to post to per blog</div>
+    <div class="modal-svc-grid" id="modal-blog-cols"></div>
+    <div class="modal-blog-row">
+      <label for="modal-blog-count">Blogs per month:</label>
+      <input type="number" id="modal-blog-count" min="0" max="12" value="5" />
+    </div>
+    <div class="modal-section-label">Monthly deliverables</div>
+    <div class="modal-svc-grid" id="modal-monthly-svcs"></div>
+    <div class="modal-btns">
+      <button class="modal-btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="modal-btn-primary" id="modal-confirm-btn" onclick="confirmModal()">Add client</button>
+    </div>
+  </div>
+</div>
 
+<script>
+const SUPA_URL='https://egqyhhqtcpssdwolbtvd.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVncXloaHF0Y3Bzc2R3b2xidHZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwMjE4NjAsImV4cCI6MjA5NjU5Nzg2MH0.AYzOBpIj4RdbLxrKf_IEQOEurbxDVWtKra_jVZrHKPg';
+const hdrs={'apikey':SUPA_KEY,'Authorization':`Bearer ${SUPA_KEY}`,'Content-Type':'application/json','Prefer':'return=representation'};
 
+const BLOG_COL_OPTIONS=[
+  {id:'website',label:'Website'},
+  {id:'gmb',label:'Google My Business'},
+  {id:'facebook',label:'Facebook'},
+  {id:'instagram',label:'Instagram'},
+  {id:'tiktok',label:'TikTok'},
+];
+const MONTHLY_OPTIONS=[
+  {id:'gform_newsletter',label:'Google Form - Newsletter Content',icon:'ti-forms'},
+  {id:'newsletter',label:'Newsletter',icon:'ti-mail'},
+  {id:'market',label:'Market Report',icon:'ti-chart-bar'},
+  {id:'email_blast',label:'Email Blasts',icon:'ti-send'},
+  {id:'holiday',label:'Holiday Flyers',icon:'ti-confetti'},
+];
 
+let clients=[],checks={},monthKey='';
+let modalMode='add',modalClientId=null,pendingNewClientName=null;
 
+function getMonthKey(){const d=new Date();return d.getFullYear()+'-'+d.getMonth();}
+function getNextMonthName(){const d=new Date();d.setMonth(d.getMonth()+1);return d.toLocaleDateString('en-US',{month:'long',year:'numeric'});}
+function setSyncStatus(s,m){const d=document.getElementById('sync-dot');d.className='sync-dot'+(s==='syncing'?' syncing':s==='error'?' error':'');document.getElementById('sync-label').textContent=m||'Synced ✓';}
 
+async function fetchAll(){
+  setSyncStatus('syncing','Loading...');
+  monthKey=getMonthKey();
+  try{
+    const[cl,ch]=await Promise.all([
+      fetch(`${SUPA_URL}/rest/v1/cpt_clients?select=*&order=sort_order.asc`,{headers:hdrs}).then(r=>r.json()),
+      fetch(`${SUPA_URL}/rest/v1/cpt_checks?select=*&month_key=eq.${monthKey}`,{headers:hdrs}).then(r=>r.json()),
+    ]);
+    clients=Array.isArray(cl)?cl:[];
+    checks={};
+    if(Array.isArray(ch))ch.forEach(c=>{checks[c.check_key]=true;});
+    setSyncStatus('ok','Synced ✓');render();
+  }catch(e){setSyncStatus('error','Sync error');console.error(e);}
+}
 
+async function saveNewClient(client){
+  await fetch(`${SUPA_URL}/rest/v1/cpt_clients`,{method:'POST',headers:hdrs,body:JSON.stringify(client)});
+}
+async function updateClientSvcs(client){
+  await fetch(`${SUPA_URL}/rest/v1/cpt_clients?id=eq.${client.id}`,{method:'PATCH',headers:hdrs,body:JSON.stringify({deliverables:client.deliverables,blog_count:client.blog_count})});
+}
+async function patchOrder(){
+  await Promise.all(clients.map((c,i)=>fetch(`${SUPA_URL}/rest/v1/cpt_clients?id=eq.${c.id}`,{method:'PATCH',headers:hdrs,body:JSON.stringify({sort_order:i})})));
+}
+async function deleteClientDB(cid){
+  await fetch(`${SUPA_URL}/rest/v1/cpt_clients?id=eq.${cid}`,{method:'DELETE',headers:hdrs});
+  await fetch(`${SUPA_URL}/rest/v1/cpt_checks?client_id=eq.${cid}`,{method:'DELETE',headers:hdrs});
+}
+async function toggleCheck(key,cid,val){
+  checks[key]=val;
+  renderSummary();
+  if(val){
+    await fetch(`${SUPA_URL}/rest/v1/cpt_checks`,{method:'POST',headers:{...hdrs,'Prefer':'return=minimal,resolution=merge-duplicates'},body:JSON.stringify({id:cid+'_'+monthKey+'_'+key,client_id:cid,month_key:monthKey,check_key:key,checked:true})});
+  }else{
+    await fetch(`${SUPA_URL}/rest/v1/cpt_checks?check_key=eq.${encodeURIComponent(key)}&month_key=eq.${monthKey}&client_id=eq.${cid}`,{method:'DELETE',headers:hdrs});
+  }
+}
+async function resetMonth(){
+  if(!confirm(`Reset all checkboxes to prepare for ${getNextMonthName()}?`))return;
+  await fetch(`${SUPA_URL}/rest/v1/cpt_checks?month_key=eq.${monthKey}`,{method:'DELETE',headers:hdrs});
+  checks={};render();
+}
+
+function clientProgress(client){
+  const svcs=client.deliverables||{};
+  const blogCols=(svcs.blog_cols||[]);
+  const monthlySvcs=(svcs.monthly||[]);
+  let done=0,total=0;
+  const bc=client.blog_count||0;
+  if(bc>0){
+    if(blogCols.length>0){
+      for(let b=1;b<=bc;b++) blogCols.forEach(col=>{total++;if(checks[`${client.id}_b${b}_${col}`])done++;});
+    }else{
+      for(let b=1;b<=bc;b++){total++;if(checks[`${client.id}_b${b}_done`])done++;}
+    }
+  }
+  monthlySvcs.forEach(s=>{total++;if(checks[`${client.id}_${s}`])done++;});
+  return{done,total};
+}
+
+function renderSummary(){
+  let td=0,tt=0;
+  clients.forEach(c=>{const p=clientProgress(c);td+=p.done;tt+=p.total;});
+  const pct=tt?Math.round(td/tt*100):0;
+  document.getElementById('summary').innerHTML=`
+    <div class="stat"><div class="stat-val">${clients.length}</div><div class="stat-lbl">Active clients</div></div>
+    <div class="stat"><div class="stat-val">${td}</div><div class="stat-lbl">Tasks complete</div></div>
+    <div class="stat"><div class="stat-val">${tt-td}</div><div class="stat-lbl">Tasks remaining</div></div>
+    <div class="stat"><div class="stat-val">${pct}%</div><div class="stat-lbl">Month complete</div></div>`;
+}
+
+function initials(n){return n.trim().split(/\s+/).map(w=>w[0]||'').join('').slice(0,2).toUpperCase();}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function render(){
+  renderSummary();
+  const list=document.getElementById('clients-list');
+  list.innerHTML='';
+  if(!clients.length){
+    list.innerHTML='<div class="empty-state"><i class="ti ti-users"></i>No clients yet — add one above to get started</div>';
+    return;
+  }
+  clients.forEach(client=>{
+    const svcs=client.deliverables||{};
+    const blogCols=svcs.blog_cols||[];
+    const monthlySvcs=svcs.monthly||[];
+    const bc=client.blog_count||0;
+    const prog=clientProgress(client);
+    const pct=prog.total?Math.round(prog.done/prog.total*100):0;
+    const card=document.createElement('div');
+    card.className='client-card';card.draggable=true;card.dataset.id=client.id;
+    const hdr=document.createElement('div');hdr.className='card-header';
+    hdr.innerHTML=`
+      <span class="drag-handle"><i class="ti ti-grip-vertical"></i></span>
+      <div class="avatar" id="avatar-${client.id}">${initials(client.name)}</div>
+      <span class="card-name" id="card-name-${client.id}">${esc(client.name)}</span>
+      <input class="card-name-edit" id="card-name-input-${client.id}" type="text" value="${esc(client.name)}" onkeydown="handleNameKey(event,'${client.id}')" />
+      <div class="card-progress">
+        <div class="prog-bar"><div class="prog-fill" style="width:${pct}%"></div></div>
+        <span class="prog-pct">${pct}%</span>
+      </div>
+      <button class="edit-name-btn" onclick="toggleNameEdit('${client.id}')"><i class="ti ti-pencil" style="font-size:11px;vertical-align:-1px;margin-right:2px"></i>Rename</button>
+      <button class="edit-svc-btn" onclick="openEditModal('${client.id}')"><i class="ti ti-settings" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>Services</button>
+      <div class="move-btns">
+        <button class="move-btn" onclick="moveClient('${client.id}',-1)"><i class="ti ti-chevron-up"></i></button>
+        <button class="move-btn" onclick="moveClient('${client.id}',1)"><i class="ti ti-chevron-down"></i></button>
+      </div>
+      <button class="del-btn" onclick="removeClient('${client.id}')"><i class="ti ti-trash"></i></button>`;
+    card.appendChild(hdr);
+    const body=document.createElement('div');body.className='card-body';
+    const hasBlog=bc>0;
+    const hasCols=blogCols.length>0;
+    const allCols=['Content',...(hasBlog&&hasCols?blogCols.map(c=>BLOG_COL_OPTIONS.find(x=>x.id===c)?.label||c):[])];
+    if(!hasBlog&&!monthlySvcs.length){
+      body.innerHTML='<div class="no-services"><i class="ti ti-settings" style="margin-right:5px"></i>No services configured — click Services to set up</div>';
+    }else{
+      const table=document.createElement('table');
+      const thead=document.createElement('thead');thead.className='col-heads';
+      thead.innerHTML=`<tr>${allCols.map((h,i)=>`<th${i===0?' class="col-label"':''}>${h}</th>`).join('')}</tr>`;
+      table.appendChild(thead);
+      const tbody=document.createElement('tbody');table.appendChild(tbody);
+      if(hasBlog){
+        const sec=document.createElement('tr');sec.className='section-label';
+        sec.innerHTML=`<td colspan="${allCols.length}">Blogs — ${bc} per month</td>`;
+        tbody.appendChild(sec);
+        for(let b=1;b<=bc;b++){
+          const row=document.createElement('tr');row.className='data-row';
+          if(hasCols){
+            let cells=`<td class="col-label">Blog ${b}</td>`;
+            blogCols.forEach(col=>{
+              const key=`${client.id}_b${b}_${col}`;
+              cells+=`<td><input type="checkbox" ${checks[key]?'checked':''} onchange="toggleCheck('${key}','${client.id}',this.checked)" /></td>`;
+            });
+            row.innerHTML=cells;
+          }else{
+            const key=`${client.id}_b${b}_done`;
+            const done=checks[key];
+            row.innerHTML=`<td class="col-label">Blog ${b}</td><td style="text-align:left;padding-left:14px"><div class="monthly-check"><input type="checkbox" ${done?'checked':''} onchange="toggleCheck('${key}','${client.id}',this.checked)" /><span class="monthly-status ${done?'done-status':''}">${done?'Done':'Pending'}</span></div></td>`;
+          }
+          tbody.appendChild(row);
+        }
+      }
+      if(monthlySvcs.length){
+        const sec=document.createElement('tr');sec.className='section-label';
+        sec.innerHTML=`<td colspan="${allCols.length}">Monthly Deliverables</td>`;
+        tbody.appendChild(sec);
+        monthlySvcs.forEach(s=>{
+          const svc=MONTHLY_OPTIONS.find(x=>x.id===s);if(!svc)return;
+          const key=`${client.id}_${s}`;const done=checks[key];
+          const row=document.createElement('tr');row.className='data-row monthly-row';
+          row.innerHTML=`<td class="col-label">${svc.label}</td><td colspan="${allCols.length-1}" style="text-align:left;padding-left:14px"><div class="monthly-check"><input type="checkbox" ${done?'checked':''} onchange="toggleCheck('${key}','${client.id}',this.checked)" /><span class="monthly-status ${done?'done-status':''}">${done?'Sent':'Pending'}</span></div></td>`;
+          tbody.appendChild(row);
+        });
+      }
+      body.appendChild(table);
+    }
+    card.appendChild(body);
+    const notes=document.createElement('div');notes.className='notes-section';
+    const notesText=client.notes||'';
+    notes.innerHTML=`
+      <div class="notes-header"><div class="notes-label"><i class="ti ti-notes"></i>Notes</div></div>
+      <div class="notes-text${notesText?'':' empty'}" id="notes-text-${client.id}" onclick="openNotesEdit('${client.id}')">${notesText||'Click to add notes...'}</div>
+      <textarea class="notes-edit-area" id="notes-area-${client.id}" placeholder="Add notes here...">${notesText}</textarea>
+      <div class="notes-actions" id="notes-actions-${client.id}">
+        <button class="notes-save-btn" onclick="saveNotes('${client.id}')">Save</button>
+        <button class="notes-cancel-btn" onclick="cancelNotesEdit('${client.id}')">Cancel</button>
+      </div>`;
+    card.appendChild(notes);
+    card.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',client.id);card.classList.add('dragging');});
+    card.addEventListener('dragend',()=>card.classList.remove('dragging'));
+    card.addEventListener('dragover',e=>{e.preventDefault();card.classList.add('drag-over');});
+    card.addEventListener('dragleave',()=>card.classList.remove('drag-over'));
+    card.addEventListener('drop',e=>{
+      e.preventDefault();card.classList.remove('drag-over');
+      const fromId=e.dataTransfer.getData('text/plain');if(fromId===client.id)return;
+      const fi=clients.findIndex(c=>c.id===fromId),ti=clients.findIndex(c=>c.id===client.id);
+      const[moved]=clients.splice(fi,1);clients.splice(ti,0,moved);
+      patchOrder();render();
+    });
+    list.appendChild(card);
+  });
+}
+
+function buildModalChips(){
+  const client=modalMode==='edit'?clients.find(c=>c.id===modalClientId):null;
+  const svcs=client?.deliverables||{};
+  const activeBlogCols=new Set(svcs.blog_cols||[]);
+  const activeMonthly=new Set(svcs.monthly||[]);
+  document.getElementById('modal-blog-cols').innerHTML=BLOG_COL_OPTIONS.map(s=>`
+    <div class="svc-chip${activeBlogCols.has(s.id)?' active':''}" data-modal-type="blog_col" data-svc="${s.id}" onclick="toggleModalChip(this)">${s.label}</div>`).join('');
+  document.getElementById('modal-monthly-svcs').innerHTML=MONTHLY_OPTIONS.map(s=>`
+    <div class="svc-chip${activeMonthly.has(s.id)?' active':''}" data-modal-type="monthly" data-svc="${s.id}" onclick="toggleModalChip(this)"><i class="ti ${s.icon}"></i>${s.label}</div>`).join('');
+  document.getElementById('modal-blog-count').value=client?.blog_count||5;
+}
+
+function openAddModal(){
+  const name=document.getElementById('new-client').value.trim();if(!name)return;
+  pendingNewClientName=name;modalMode='add';modalClientId=null;
+  document.getElementById('modal-title').textContent='Configure client services';
+  document.getElementById('modal-client-name').textContent=`Client: ${name}`;
+  document.getElementById('modal-confirm-btn').textContent='Add client';
+  buildModalChips();document.getElementById('add-modal').classList.add('open');
+}
+function openEditModal(cid){
+  const client=clients.find(c=>c.id===cid);if(!client)return;
+  modalMode='edit';modalClientId=cid;
+  document.getElementById('modal-title').textContent='Edit services';
+  document.getElementById('modal-client-name').textContent=`Client: ${client.name}`;
+  document.getElementById('modal-confirm-btn').textContent='Save services';
+  buildModalChips();document.getElementById('add-modal').classList.add('open');
+}
+function closeModal(){document.getElementById('add-modal').classList.remove('open');pendingNewClientName=null;}
+function toggleModalChip(chip){chip.classList.toggle('active');}
+
+async function confirmModal(){
+  const blogCols=[...document.querySelectorAll('[data-modal-type="blog_col"].active')].map(c=>c.dataset.svc);
+  const monthly=[...document.querySelectorAll('[data-modal-type="monthly"].active')].map(c=>c.dataset.svc);
+  const blogCount=parseInt(document.getElementById('modal-blog-count').value)||0;
+  const deliverables={blog_cols:blogCols,monthly};
+  if(modalMode==='add'){
+    const client={id:'c_'+Date.now(),name:pendingNewClientName,sort_order:clients.length,deliverables,blog_count:blogCount,notes:'',added:new Date().toISOString().split('T')[0]};
+    clients.push(client);await saveNewClient(client);
+    document.getElementById('new-client').value='';
+  }else{
+    const client=clients.find(c=>c.id===modalClientId);
+    if(client){client.deliverables=deliverables;client.blog_count=blogCount;await updateClientSvcs(client);}
+  }
+  closeModal();render();
+}
+
+function toggleNameEdit(cid){
+  const nameEl=document.getElementById(`card-name-${cid}`);
+  const inputEl=document.getElementById(`card-name-input-${cid}`);
+  const isOpen=inputEl.classList.contains('open');
+  if(isOpen){saveClientName(cid);}else{nameEl.classList.add('editing');inputEl.classList.add('open');inputEl.focus();inputEl.select();}
+}
+function handleNameKey(e,cid){if(e.key==='Enter'){e.preventDefault();saveClientName(cid);}if(e.key==='Escape'){cancelNameEdit(cid);}}
+async function saveClientName(cid){
+  const inputEl=document.getElementById(`card-name-input-${cid}`);
+  const nameEl=document.getElementById(`card-name-${cid}`);
+  const avatarEl=document.getElementById(`avatar-${cid}`);
+  const newName=inputEl.value.trim();if(!newName){cancelNameEdit(cid);return;}
+  const client=clients.find(c=>c.id===cid);if(!client)return;
+  client.name=newName;nameEl.textContent=newName;
+  if(avatarEl)avatarEl.textContent=initials(newName);
+  inputEl.classList.remove('open');nameEl.classList.remove('editing');
+  setSyncStatus('syncing','Saving...');
+  await fetch(`${SUPA_URL}/rest/v1/cpt_clients?id=eq.${cid}`,{method:'PATCH',headers:hdrs,body:JSON.stringify({name:newName})});
+  setSyncStatus('ok','Synced ✓');
+}
+function cancelNameEdit(cid){
+  const client=clients.find(c=>c.id===cid);
+  const inputEl=document.getElementById(`card-name-input-${cid}`);
+  const nameEl=document.getElementById(`card-name-${cid}`);
+  if(inputEl){inputEl.value=client?.name||'';inputEl.classList.remove('open');}
+  if(nameEl)nameEl.classList.remove('editing');
+}
+function openNotesEdit(cid){
+  document.getElementById(`notes-area-${cid}`)?.classList.add('open');
+  document.getElementById(`notes-actions-${cid}`)?.classList.add('open');
+  document.getElementById(`notes-text-${cid}`)?.style.setProperty('display','none');
+  document.getElementById(`notes-area-${cid}`)?.focus();
+}
+function cancelNotesEdit(cid){
+  const client=clients.find(c=>c.id===cid);
+  const area=document.getElementById(`notes-area-${cid}`);
+  const textEl=document.getElementById(`notes-text-${cid}`);
+  if(area){area.value=client?.notes||'';area.classList.remove('open');}
+  document.getElementById(`notes-actions-${cid}`)?.classList.remove('open');
+  if(textEl)textEl.style.removeProperty('display');
+}
+async function saveNotes(cid){
+  const area=document.getElementById(`notes-area-${cid}`);
+  const textEl=document.getElementById(`notes-text-${cid}`);
+  if(!area)return;
+  const newNotes=area.value.trim();
+  const client=clients.find(c=>c.id===cid);if(!client)return;
+  client.notes=newNotes;
+  if(textEl){textEl.textContent=newNotes||'Click to add notes...';textEl.className='notes-text'+(newNotes?'':' empty');textEl.style.removeProperty('display');}
+  area.classList.remove('open');
+  document.getElementById(`notes-actions-${cid}`)?.classList.remove('open');
+  setSyncStatus('syncing','Saving...');
+  await fetch(`${SUPA_URL}/rest/v1/cpt_clients?id=eq.${cid}`,{method:'PATCH',headers:hdrs,body:JSON.stringify({notes:newNotes})});
+  setSyncStatus('ok','Synced ✓');
+}
+async function removeClient(cid){
+  if(!confirm('Remove this client?'))return;
+  clients=clients.filter(c=>c.id!==cid);
+  await deleteClientDB(cid);render();
+}
+async function moveClient(cid,dir){
+  const idx=clients.findIndex(c=>c.id===cid);const ni=idx+dir;
+  if(ni<0||ni>=clients.length)return;
+  const[m]=clients.splice(idx,1);clients.splice(ni,0,m);
+  await patchOrder();render();
+}
+
+document.getElementById('new-client').addEventListener('keydown',e=>{if(e.key==='Enter')openAddModal();});
+const now=new Date();
+monthKey=getMonthKey();
+document.getElementById('month-label').textContent=now.toLocaleDateString('en-US',{month:'long',year:'numeric'});
+fetchAll();
+</script>
+</body>
+</html>
